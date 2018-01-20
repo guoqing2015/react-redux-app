@@ -1,0 +1,29 @@
+.category {
+  background: #ffffff;
+
+  &__item {
+    min-height: 2.25rem;
+    //line-height: 2.25rem;
+    padding: 0 1rem;
+  }
+
+  &__title {
+    color: #666;
+    white-space: nowrap;
+    &.hidden {
+      visibility: hidden;
+    }
+  }
+
+  //&__content_box {
+  //  padding: 0.5rem 0;
+  //}
+
+  &__content {
+    margin-right: 0.75rem;
+    float: left;
+    padding: 0.5rem 0;
+  }
+
+}
+

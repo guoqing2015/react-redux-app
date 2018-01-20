@@ -1,0 +1,8 @@
+export const GET_NOTICE_LIST = 'App/notice/GET_NOTICE_LIST';
+export const GET_NOTICE_LIST_SUCCESS = 'App/notice/GET_NOTICE_LIST_SUCCESS';
+export const GET_NOTICE_LIST_ERROR = 'App/notice/GET_NOTICE_LIST_ERROR';
+
+export const UPDATE_NOTICE_STATUS = 'App/notice/UPDATE_NOTICE_STATUS';
+export const DELETE_NOTICE_STATUS = 'App/notice/DELETE_NOTICE_STATUS';
+
+

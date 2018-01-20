@@ -1,0 +1,70 @@
+.slick-slider .slick-list, .slick-slider .slick-track {
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.slick-list, .slick-slider, .slick-track {
+  position: relative;
+  display: block;
+}
+
+.slick-list {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.slick-slider {
+  height: 7rem;
+}
+
+.slick-track {
+  top: 0;
+  left: 0;
+}
+
+.slick-slide  {
+  height: 7rem;
+  overflow: hidden;
+  float: left;
+  min-height: 1px;
+
+}
+
+.slick-slide img {
+  width: 100%;
+}
+
+.slick-next, .slick-prev {
+  display: none!important;
+}
+
+
+.slick-dots {
+  color: rgb(20, 145, 197);
+  position: absolute;
+  z-index: 500;
+  bottom: 0.5rem;
+  right: 0.5rem;
+}
+
+.slick-dots li {
+  overflow: hidden;
+  width: 0.25rem;
+  height: 0.25rem;
+  background: rgba(255, 255, 255, .3);
+  display: inline-block;
+  margin: 0 0.125rem;
+  border-radius: 0.5rem;
+  border: 0.05rem solid rgba(5,15,28,.05);
+}
+
+.slick-dots li.slick-active {
+  background: #fff;
+  border-color: rgba(5,15,28,.08);
+  width: 0.75rem;
+}
+

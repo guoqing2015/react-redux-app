@@ -1,0 +1,117 @@
+.renew{
+  background: #ffffff;
+  padding: 1rem 0.75rem;
+  ul {
+  }
+  li {
+    width: 33.3333333333333%;
+    float: left;
+    padding: 0 0.75rem 0 0;
+    text-align: center;
+    margin-bottom: 0.75rem;
+
+
+    .tariffname {
+      font-size: 0.6rem;
+      margin: 0rem 0 0.2rem 0;
+      padding: 0.2rem 0 0 0;
+    }
+
+    .discountprice {
+      color: #ff9a14;
+      margin-bottom: 0.2rem;
+    }
+
+    .primeprice {
+      text-decoration: line-through;
+      font-size: 0.6rem;
+      margin-bottom: 0rem;
+      color: #999;
+    }
+  }
+
+  li:nth-child(3n) {
+    padding: 0 0 0 0;
+  }
+
+  li.active {
+    .renew__li_inner {
+      background-color: #e6f7ff;
+      color: #26aaf2;
+      border-color: #26aaf2;
+    }
+  }
+
+  &__li_inner {
+    border: 1px solid #dcdcdc;
+    border-radius: 0.2rem;
+    padding: 0.2rem 0;
+
+  }
+
+  &__explain {
+    h3 {
+      height: 1.75rem;
+      line-height: 1.75rem;
+    }
+    label {
+      color: #666;
+    }
+    .discountprice {
+      color: #ff9a14;
+    }
+
+    .primeprice {
+      text-decoration: line-through;
+    }
+  }
+
+  footer {
+    overflow: hidden;
+    position: fixed;
+    z-index: 999;
+    height: 2.2rem;
+    background: rgba(40,56,71,.95);
+    line-height: 2.2rem;
+    padding: 0 .5rem;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    color: #fff;
+  }
+
+
+  &__pay__button {
+    display: inline-block;
+    width: 3.75rem;
+    height: 1.7rem;
+    float: right;
+    margin-top: .25rem;
+    font-size: .8rem;
+    border-radius: 4px;
+    background: #ff9a14;
+    border: none;
+    color: #fff;
+  }
+
+  &__pay__price {
+    display: inline-block;
+    position: relative;
+    font-size: 1.1rem;
+    color: #ff9a14;
+    font-weight: 600;
+    margin-left: .5rem;
+    padding-right: 1rem;
+
+    dfn {
+      font-weight: 400;
+      font-size: .8rem;
+      margin-right: .25rem;
+      color: #ff9a14;
+      font-family: Arial;
+    }
+  }
+
+}

@@ -1,0 +1,55 @@
+.location {
+  h4 {
+    padding: 0 0.75rem;
+    height: 1.25rem;
+    line-height: 1.25rem;
+  }
+
+  .location-list.no-margin {
+    margin-top:0;
+  }
+
+  .location-list {
+    margin-top: 2.2rem;
+    background: #ffffff;
+
+    li {
+      position: relative;
+      margin-left: 0.75rem;
+      font-size: 0.75rem;
+      line-height: 2.15rem;
+      color: #666;
+      border-bottom: 1px solid #e4e4e4;
+
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .tab-location {
+    z-index: 11;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    background: #efefef;
+
+    & li {
+      position: relative;
+      display: table-cell;
+      padding: 0 0.75rem;
+      line-height: 2.2rem;
+      text-align: center;
+      color: gray;
+    }
+
+    & li.current {
+      color: #333;
+    }
+  }
+}
+

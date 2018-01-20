@@ -1,0 +1,90 @@
+.pagination-wrap {
+  float: left;
+  width: 100%;
+  padding: 0.75rem 0.75rem 0.75rem;
+  background: #ffffff;
+}
+
+
+.pagination {
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-ms-flexbox;
+  display:flex
+}
+
+
+.pagination .page-li{
+  -webkit-box-flex:1;
+  -webkit-flex:1;
+  -ms-flex:1;
+  flex:1;
+  text-align: center;
+}
+
+.pagination .page-li a{
+  width: 1.2rem;
+  height: 1.2rem;
+  line-height: 1.2rem;
+  border-radius: 1.2rem;
+  text-align: center;
+  font-size: 0.6rem;
+
+  border: 1px solid #D1DBE5;
+  margin-right: 0.5rem;
+  display: inline-block;
+  color: #666;
+  /*float: left;*/
+
+}
+
+.pagination .page-li.active a{
+  background: #20A0FF;
+  color: #ffffff;
+  border-color: #20A0FF;
+}
+
+.pagination li.break-me a{
+  border: none;
+}
+
+.pagination li.none{
+  /*display: none;*/
+}
+
+.pagination li.page-last{
+  position: fixed;
+  bottom: 0.75rem;
+  left: 0.5rem;
+  width: 3.8rem;
+  height: 1rem;
+  border-radius: 0;
+  font-size: 0.75rem;
+  color: #333;
+  z-index: 2;
+}
+
+
+
+.pagination li.page-next {
+  display: inline-block;
+  z-index: 2;
+  position: fixed;
+  bottom: 0.25rem;
+  right: 0.5rem;
+  background-color: #ff7d13;
+  font-size: 0.8rem;
+  color: #fff;
+  border-radius: 0.2rem;
+  line-height: 1.05rem;
+  float: right;
+}
+
+.pagination li.page-next a div {
+  padding: 0.5rem 0.5rem;
+}
+
+.pagination li.page-next a{
+  font-size: 0.8rem;
+  color: #fff;
+}

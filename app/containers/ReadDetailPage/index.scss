@@ -1,0 +1,107 @@
+.read-detail {
+  background: #ffffff;
+  padding-bottom: 2.5rem;
+
+  article {
+    padding: 0.75rem;
+    header {
+      h1 {
+        font-size: 0.8rem;
+        text-align: center;
+        margin-bottom: 0.15rem;
+      }
+
+      p {
+        text-align: left;
+        color: #999;
+        //margin-top: 0.2rem;
+      }
+    }
+
+    section {
+      word-break: break-all;
+      p {
+        text-indent: 2em;
+        img {
+          max-width: 100%!important;
+          float: left;
+        }
+      }
+    }
+  }
+
+  &__footer {
+    min-height: 2.5rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fafafa;
+    padding: .25rem .25rem .25rem .5rem;
+    box-sizing: border-box;
+    bottom: constant(safe-area-inset-bottom);
+    bottom: env(safe-area-inset-bottom);
+
+    input {
+      width: 100%;
+    }
+
+    button {
+      background-color: #ff7d13;
+      padding: .5rem 2rem;
+      font-size: .9rem;
+      color: #fff;
+      border-radius: .2rem;
+      line-height: 1.05rem;
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: justify;
+      justify-content: center;
+    }
+  }
+
+
+  &__comment {
+    //margin-bottom: 1rem;
+    h3 {
+      box-shadow: inset 0 -1px 0 2px #fff;
+      width: 100%;
+      background: #F5F5F5;
+      padding-left: 0.75rem;
+      height:1.75rem;
+      line-height: 1.75rem;
+    }
+    li {
+      padding: 0.25rem 0.75rem;
+      .header-wrap {
+        width: 2.5rem;
+        height: 2.5rem;
+        margin-right: 0.2rem;
+        img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      p {
+        word-break: break-all;
+      }
+
+      .username {
+        float: left;
+        font-size: 0.5rem;
+        color: #999;
+      }
+
+      .createtime {
+        float: right;
+        font-size: 0.5rem;
+        color: #999;
+      }
+    }
+
+  }
+
+}
