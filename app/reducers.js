@@ -12,6 +12,7 @@ import areaReducer from 'redux/modules/Area/modules/reducer';
 import categoryReducer from 'redux/modules/Category/modules/reducer';
 import chartReducer from 'redux/modules/Chart/modules/reducer';
 import commentReducer from 'redux/modules/Comment/modules/reducer';
+import tradeReducer from 'redux/modules/Trade/modules/reducer';
 
 /*
  * routeReducer
@@ -56,6 +57,7 @@ export default function createReducer(injectedReducers) {
     category: categoryReducer,
     chart: chartReducer,
     comment: commentReducer,
+    trade: tradeReducer,
     // language: languageProviderReducer,
     ...injectedReducers,
   });

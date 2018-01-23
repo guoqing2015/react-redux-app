@@ -56,8 +56,12 @@ export class RenewPage extends React.PureComponent { // eslint-disable-line reac
   }
 
   pay() {
+   this.props.history.replace('pay-result/' + "149082436220180123204401364");
+    return;
 
 
+    // this.props.history.replace('pay-result');
+    const _this = this;
     const tariff = this.props.tariff[this.state.selectedTariffIndex]
     if(!tariff) {
       toast.info('请选择一个套餐');
@@ -75,11 +79,6 @@ export class RenewPage extends React.PureComponent { // eslint-disable-line reac
     };
     console.log(JSON.stringify(param, 2, 2))
 
-    // var data = {
-    //   "errcode": 7001,
-    //   "errmsg": "",
-    //   "content": "{\"appId\":\"wx2d99c08880285503\",\"nonceStr\":\"cb0be8015611402e922e13553e2ed5b6\",\"package\":\"prepay_id=wx20180118105800fed71a446c0450986312\",\"paySign\":\"48BF4D1F0E3EC787C9B42411064DEDC0\",\"signType\":\"MD5\",\"timeStamp\":\"1516244354\"}"
-    // };
 
     this.setState({
       isLoading: true
@@ -88,25 +87,29 @@ export class RenewPage extends React.PureComponent { // eslint-disable-line reac
 
     axios.post(urls.TARIFF_TRADE_URL, param)
       .then((data) => {
+      // data = {
+      //   "errcode": 7001,
+      //   "errmsg": "",
+      //   "content": "{\"appId\":\"wx2d99c08880285503\",\"nonceStr\":\"dffab1ed5b1b492989579c8d6c6edeb5\",\"package\":\"prepay_id=wx2018012320440168404f6d160107898626\",\"paySign\":\"26585FF12E1ABFE3B7D600EBE0685E29\",\"signType\":\"MD5\",\"timeStamp\":\"1516711442\",\"tradeno\":\"149082436220180123204401364\"}"
+      // };
         if (data.errcode == 7001) {
           const content = JSON.parse(data.content);
           onBridgeReady(content)
         } else {
-          toast.info(response.errmsg);
+          toast.info(data.errmsg);
           this.setState({
             isLoading: false
           })
         }
       })
       .catch((error) => {
-        toast.info('获取验证码失败 ' + error);
+        console.log('error')
         this.setState({
           isLoading: false
         })
       })
 
     function onBridgeReady(payInfo) {
-      debugger;
       WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
           "appId": payInfo.appId,     //公众号名称，由商户传入
@@ -117,8 +120,13 @@ export class RenewPage extends React.PureComponent { // eslint-disable-line reac
           "paySign": payInfo.paySign, //微信签名
         },
         function (res) {
+             // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+          console.log(JSON.stringify(res));
           if (res.err_msg == "get_brand_wcpay_request:ok") {
-          }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+            _this.props.history.replace('/pay-result/' + payInfo.tradeno);
+          } else {
+            _this.props.history.push('/pay-result/' + payInfo.tradeno);
+          }
         }
       );
     }

@@ -77,7 +77,7 @@ class App extends React.Component {
         if (response.errcode == 7001) {
           let jssdkConfig = JSON.parse(response.content);
             wx.config({
-              debug: true,
+              debug: false,
               appId: jssdkConfig.appId,
               timestamp: jssdkConfig.timestamp,
               nonceStr: jssdkConfig.nonceStr,

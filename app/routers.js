@@ -29,6 +29,8 @@ import AreaPage from 'containers/AreaPage/Loadable';
 import ChartPage from 'containers/ChartPage/Loadable';
 import ReadListPage from 'containers/ReadListPage/Loadable';
 import ReadDetailPage from 'containers/ReadDetailPage/Loadable';
+import PaySuccessPage from 'containers/PaySuccessPage/Loadable';
+import PayErrorPage from 'containers/PayErrorPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Home from 'containers/Home/Loadable';
 
@@ -107,6 +109,8 @@ export default (store, history) => {
         <PrivateRoute path="/login" component={LoginPage}/>
         <PrivateRoute path="/member" component={MemberPage}/>
         <PrivateRoute path="/notice" component={NoticePage}/>
+        <PrivateRoute path="/pay-success/:id" component={PaySuccessPage}/>
+        <PrivateRoute path="/pay-error/:id" component={PayErrorPage}/>
         <PrivateRoute cache path="/read-list" component={ReadListPage}/>
         <PrivateRoute path="/read-detail/:id" component={ReadDetailPage}/>
         <PrivateRoute path="/renew" component={RenewPage}/>

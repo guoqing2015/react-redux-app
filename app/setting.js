@@ -67,6 +67,7 @@ export const urls = {
   QUERY_TARIFF_URL: app.url + "/api/tariff/getlist",
   USER_TARIFF_URL: app.url + "/api/user/usertariff",
   TARIFF_TRADE_URL: app.url + "/api/tariff/trade",
+  TARIFF_QUERY_URL: app.url + "/api/tariff/tradequery",
 
   EXAM_ANALYSIS_URL: app.url + "/api/exam/examanalysis",
   PRACTICE_ANALYSIS_URL: app.url + "/api/practice/practiceanalysis",
