@@ -15,6 +15,8 @@ import {
   QUERY_FOURTH_CATEGORY_SUCCESS,
   QUERY_FOURTH_CATEGORY_ERROR,
 
+  GET_ALL_CATEGORY,
+
 } from './constants';
 
 export function queryFirstCategory(payload) {
@@ -100,6 +102,13 @@ export function queryFourthCategorySuccess(response) {
 export function queryFourthCategoryError(error) {
   return {
     type: QUERY_FOURTH_CATEGORY_ERROR,
+    error
+  };
+}
+
+export function getAllCategory() {
+  return {
+    type: GET_ALL_CATEGORY,
     error
   };
 }

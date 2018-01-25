@@ -23,7 +23,7 @@ function reducer(state = initialState, action) {
         .set('error', false)
     case QUERY_DETAIL_SUCCESS:
       return state
-        .set('detail', action.response.content)
+        .set('detail', JSON.parse(action.response.content))
         .set('error', false)
         .set('loading', false)
     case QUERY_DETAIL_ERROR:

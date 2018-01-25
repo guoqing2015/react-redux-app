@@ -13,6 +13,7 @@ import {
   QUERY_FOURTH_CATEGORY,
   QUERY_FOURTH_CATEGORY_SUCCESS,
   QUERY_FOURTH_CATEGORY_ERROR,
+  GET_ALL_CATEGORY
 } from './constants';
 
 
@@ -23,6 +24,7 @@ const initialState = fromJS({
   secondCategory: false,
   thirdCategory: false,
   fourthCategory: false,
+  allCategory: {}
 });
 
 function collectReducer(state = initialState, action) {
@@ -91,6 +93,9 @@ function collectReducer(state = initialState, action) {
         .set('loading', false)
         .set('fourthCategory', false)
 
+    case GET_ALL_CATEGORY:
+      return state
+        .set('allCategory', false)
 
     default:
       return state;

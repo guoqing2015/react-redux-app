@@ -74,6 +74,11 @@ export class ExercisePage extends React.PureComponent {
     this.goStep = this.goStep.bind(this);
     this.revise = this.revise.bind(this);
 
+    this.getProjectcode = this.getProjectcode.bind(this);
+    this.getCategorycode = this.getCategorycode.bind(this);
+    this.getItemcode = this.getItemcode.bind(this);
+    this.getSubitemcode = this.getSubitemcode.bind(this);
+
   }
 
   componentDidMount() {
@@ -133,16 +138,12 @@ export class ExercisePage extends React.PureComponent {
   goStep(num) {
     if(num == 2 && !this.state.startTime) {
       this.props.buildPractice({
-        "userid": this.props.user.userid,
-        "projectcode": "",
-        "projectname": "",
-        "categorycode": "",
-        "categoryname": "",
-        "itemcode": "",
-        "itemname": "",
-        "subitemcode": "",
-        "subitemname": "",
-        "subjectnum": 10
+        "userid":this.props.user.userid,
+        "projectcode": this.getProjectcode(),
+        "categorycode": this.getCategorycode(),
+        "itemcode": this.getItemcode(),
+        "subitemcode": this.getSubitemcode(),
+        "subjectnum": this.refs.exersiceSizeInput.value || 0
       });
       return;
     } else if(num == 3) {
@@ -251,6 +252,55 @@ export class ExercisePage extends React.PureComponent {
   }
 
 
+  getProjectcode() {
+    const { firstCategory, secondCategory, thirdCategory, fourthCategory } = this.refs.categoryComponent.selector.props;
+    if(!firstCategory) return "";
+    let projectcode = [];
+    firstCategory.forEach((v) => {
+      if(v.checked) {
+        projectcode.push(v.dictcode)
+      }
+    })
+    return projectcode.join(',');
+  }
+
+  getCategorycode() {
+    const { firstCategory, secondCategory, thirdCategory, fourthCategory } = this.refs.categoryComponent.selector.props;
+    if(!secondCategory) return "";
+    let categorycode = [];
+    secondCategory.forEach((v) => {
+      if(v.checked) {
+        categorycode.push(v.dictcode)
+      }
+    })
+    return categorycode.join(',');
+  }
+
+  getItemcode() {
+    const { firstCategory, secondCategory, thirdCategory, fourthCategory } = this.refs.categoryComponent.selector.props;
+    console.log(thirdCategory)
+    if(!thirdCategory) return "";
+    let itemcode = [];
+    thirdCategory.forEach((v) => {
+      if(v.checked) {
+        itemcode.push(v.itemcode)
+      }
+    })
+    return itemcode.join(',');
+  }
+
+  getSubitemcode() {
+    const { firstCategory, secondCategory, thirdCategory, fourthCategory } = this.refs.categoryComponent.selector.props;
+    if(!fourthCategory) return "";
+    let subitemcode = [];
+    fourthCategory.forEach((v) => {
+      if(v.checked) {
+        subitemcode.push(v.itemcode)
+      }
+    })
+    return subitemcode.join(',');
+  }
+
   render() {
     const {loading, detail, examResult, match} = this.props;
     const {modal, step, answerinfo, currentSubjectIndex, startTime, endTime} = this.state;
@@ -267,7 +317,10 @@ export class ExercisePage extends React.PureComponent {
         {/************************************第一步*******************************/}
         {step == 1 &&
         <Section>
-          <Category />
+          <Category ref="categoryComponent" />
+          <div className="exercise-size">
+            题数: <input ref="exersiceSizeInput" type="text" />
+          </div>
           <Button onClick={()=> {this.goStep(2)}}>我已选好，立即练习</Button>
           {/*<ExamInfo detail={detail} type={1}></ExamInfo>*/}
         </Section>

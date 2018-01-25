@@ -4,7 +4,7 @@ const Section = styled.li`
     height: 100%;
     overflow: hidden;
     float: left;
-    width: 33.3333333333333333333%;
+    width: 50%;
     position: relative;
 `;
 

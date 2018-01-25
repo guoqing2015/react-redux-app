@@ -56,7 +56,7 @@ export class ErrancyPage extends React.PureComponent {
     this.loadList = this.loadList.bind(this);
     this.initList = this.initList.bind(this);
     this.onSelectFirstCategory = this.onSelectFirstCategory.bind(this);
-    this.onSelectOtherCategory = this.onSelectOtherCategory.bind(this);
+    this.onSelectCategory = this.onSelectCategory.bind(this);
     this.onSelectOrder = this.onSelectOrder.bind(this);
   }
 
@@ -117,7 +117,7 @@ export class ErrancyPage extends React.PureComponent {
       }), this.initList)
   }
 
-  onSelectOtherCategory(param) {
+  onSelectCategory(param) {
     this.setState((prevState, props) =>
       ({
         condition: {
@@ -169,13 +169,12 @@ export class ErrancyPage extends React.PureComponent {
         </Helmet>
         <Section>
           <ConditionUl className="border-bottom">
-            <ConditionLi>
-              {/*<ConditionList label="项目" item={selectedType} list={subjectTypes} onSelect={this.onSelectType}/>*/}
+{/*            <ConditionLi>
               <Condition1 onSelect={this.onSelectFirstCategory} />
               <ConditionLine className="border-right"></ConditionLine>
-            </ConditionLi>
+            </ConditionLi>*/}
             <ConditionLi>
-              <Condition2 label="分类"  onSelect={this.onSelectOtherCategory} />
+              <Condition2 label="分类"  onSelect={this.onSelectCategory} />
               {/*<Condition1 onSelect={this.onSelectFirstCategory} />*/}
               <ConditionLine className="border-right"></ConditionLine>
             </ConditionLi>

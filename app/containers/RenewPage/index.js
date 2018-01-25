@@ -56,11 +56,8 @@ export class RenewPage extends React.PureComponent { // eslint-disable-line reac
   }
 
   pay() {
-   this.props.history.replace('pay-success/' + "149082436220180123204401364");
-    return;
-
-
-    // this.props.history.replace('pay-result');
+   // this.props.history.replace('pay-error/' + "149082436220180123204401364");
+   //  return;
     const _this = this;
     const tariff = this.props.tariff[this.state.selectedTariffIndex]
     if(!tariff) {
@@ -87,11 +84,6 @@ export class RenewPage extends React.PureComponent { // eslint-disable-line reac
 
     axios.post(urls.TARIFF_TRADE_URL, param)
       .then((data) => {
-      // data = {
-      //   "errcode": 7001,
-      //   "errmsg": "",
-      //   "content": "{\"appId\":\"wx2d99c08880285503\",\"nonceStr\":\"dffab1ed5b1b492989579c8d6c6edeb5\",\"package\":\"prepay_id=wx2018012320440168404f6d160107898626\",\"paySign\":\"26585FF12E1ABFE3B7D600EBE0685E29\",\"signType\":\"MD5\",\"timeStamp\":\"1516711442\",\"tradeno\":\"149082436220180123204401364\"}"
-      // };
         if (data.errcode == 7001) {
           const content = JSON.parse(data.content);
           onBridgeReady(content)

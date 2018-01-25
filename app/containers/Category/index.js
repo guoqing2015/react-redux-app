@@ -6,12 +6,12 @@ import { createStructuredSelector } from 'reselect';
 import {FlexBox, FlexBoxAlignCenter, Flex} from 'components/FlexLayout';
 import {InputCheckBox, InputRadio} from 'components/Input';
 
-import {queryFirstCategory, querySecondCategory, queryThirdCategory, queryFourthCategory} from '../../redux/modules/Category/modules/actions';
+import {queryFirstCategory, querySecondCategory, queryThirdCategory, queryFourthCategory, getAllCategory} from '../../redux/modules/Category/modules/actions';
 import {makeSelectFirstCategory, makeSelectSecondCategory, makeSelectThirdCategory, makeSelectFourthCategory } from '../../redux/modules/Category/modules/selectors';
 import './index.scss';
 
 
-export class CategoryFour extends React.PureComponent {
+export class CategoryFour extends React.Component {
   constructor(props) {
     super(props);
 
@@ -32,6 +32,7 @@ export class CategoryFour extends React.PureComponent {
     this.getItemcode = this.getItemcode.bind(this);
     this.getSubitemcode = this.getSubitemcode.bind(this);
   }
+
 
   componentDidMount() {
     this.queryFirstCategory();
@@ -300,6 +301,9 @@ export function mapDispatchToProps(dispatch) {
     },
     queryFourthCategory: (param) => {
       dispatch(queryFourthCategory(param));
+    },
+    getAllCategory: (param) => {
+      dispatch(getAllCategory(param));
     },
   };
 }

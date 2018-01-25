@@ -35,28 +35,18 @@ class ChartPage extends React.PureComponent {
 
     this.analysis = this.analysis.bind(this);
     this.drawChart = this.drawChart.bind(this);
-
+    this.getProjectcode = this.getProjectcode.bind(this);
+    this.getCategorycode = this.getCategorycode.bind(this);
+    this.getItemcode = this.getItemcode.bind(this);
+    this.getSubitemcode = this.getSubitemcode.bind(this);
   }
 
   componentDidMount() {
     // 获取类型
-    //this.props.queryProject({
-    //  "parentid": "",
-    //  "parentdictcode": "project"
-    //});
-    //获取分类
-    //this.props.querySecondCategory({
-    //  "parentid": "",
-    //  "parentdictcode": "category"
-    //});
-
     this.analysis();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.props.project && nextProps.project) {
-      //this.analysis();
-    }
 
     if( !this.props.examAnalysisData && nextProps.examAnalysisData) {
       this.drawChart(nextProps.examAnalysisData);
@@ -65,29 +55,75 @@ class ChartPage extends React.PureComponent {
     if( (!this.props.practiceAnalysis && nextProps.practiceAnalysis) ) {
       this.drawChart(nextProps.practiceAnalysis);
     }
-
-
-
   }
+
+
+  getProjectcode() {
+    const { firstCategory, secondCategory, thirdCategory, fourthCategory } = this.refs.categoryComponent.selector.props;
+    if(!firstCategory) return "";
+    let projectcode = [];
+    firstCategory.forEach((v) => {
+      if(v.checked) {
+        projectcode.push(v.dictcode)
+      }
+    })
+    return projectcode.join(',');
+  }
+
+  getCategorycode() {
+    const { firstCategory, secondCategory, thirdCategory, fourthCategory } = this.refs.categoryComponent.selector.props;
+    if(!secondCategory) return "";
+    let categorycode = [];
+    secondCategory.forEach((v) => {
+      if(v.checked) {
+        categorycode.push(v.dictcode)
+      }
+    })
+    return categorycode.join(',');
+  }
+
+  getItemcode() {
+    const { firstCategory, secondCategory, thirdCategory, fourthCategory } = this.refs.categoryComponent.selector.props;
+    console.log(thirdCategory)
+    if(!thirdCategory) return "";
+    let itemcode = [];
+    thirdCategory.forEach((v) => {
+      if(v.checked) {
+        itemcode.push(v.itemcode)
+      }
+    })
+    return itemcode.join(',');
+  }
+
+  getSubitemcode() {
+    const { firstCategory, secondCategory, thirdCategory, fourthCategory } = this.refs.categoryComponent.selector.props;
+    if(!fourthCategory) return "";
+    let subitemcode = [];
+    fourthCategory.forEach((v) => {
+      if(v.checked) {
+        subitemcode.push(v.itemcode)
+      }
+    })
+    return subitemcode.join(',');
+  }
+
 
   /**
    * 获取折线图数据 
    **/
   analysis() {
     if(!this.props.inputs) return;
-
     const {startDate, endDate, chartType} = this.props.inputs;
-    //const chartType = this.props.inputs.chartType;
-
     const param = {
       "userid":this.props.user.userid,
-      "projectcode": "",
-      "categorycode": "",
-      "itemcode": "",
-      "subitemcode": "",
+      "projectcode": this.getProjectcode(),
+      "categorycode": this.getCategorycode(),
+      "itemcode": this.getItemcode(),
+      "subitemcode": this.getSubitemcode(),
       "startdate": startDate,
       "enddate": endDate
     };
+    console.log(JSON.stringify(param,2,2));
     if (chartType == '1') {
       this.props.examAnalysis(param);
     } else if(chartType == '2') {
@@ -162,7 +198,7 @@ class ChartPage extends React.PureComponent {
             </div>
 
 
-            <Category />
+            <Category ref="categoryComponent" />
 
             <div className="chart-condition__item border-bottom">
               <FlexBoxAlignCenter className="check-wrap">

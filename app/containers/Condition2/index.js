@@ -37,6 +37,7 @@ export class Condition2 extends React.PureComponent {
       isPass: false,
       startDate: "",
       endDate: "",
+      projectcodeArray: [],
       categorycodeArray: [],
       itemcodeArray: [],
       subitemcodeArray: [],
@@ -48,18 +49,22 @@ export class Condition2 extends React.PureComponent {
     this.handleSelect = this.handleSelect.bind(this);
     this.reset = this.reset.bind(this);
     this.confirm = this.confirm.bind(this);
+
+    this.queryFirstCategory = this.queryFirstCategory.bind(this);
+    this.querySecondCategory = this.querySecondCategory.bind(this);
+    this.queryThirdCategory = this.queryThirdCategory.bind(this);
+    this.queryFourthCategory = this.queryFourthCategory.bind(this);
+    this.getProjectcode = this.getProjectcode.bind(this);
+    this.getCategorycode = this.getCategorycode.bind(this);
+    this.getItemcode = this.getItemcode.bind(this);
+    this.getSubitemcode = this.getSubitemcode.bind(this);
   }
 
   componentDidMount() {
-    this.props.querySecondCategory({
-      "parentid": "",
-      "parentdictcode": "category"
-    });
-    this.props.queryThirdCategory({
-      "projectcode": "",
-      "categorycode": "",
-      "parentid": ""
-    });
+    this.queryFirstCategory();
+    this.querySecondCategory();
+    this.queryThirdCategory();
+    this.queryFourthCategory();
   }
 
 
@@ -67,6 +72,7 @@ export class Condition2 extends React.PureComponent {
     this.setState({
       startDate: "",
       endDate: "",
+      projectcodeArray: [],
       categorycodeArray: [],
       itemcodeArray: [],
       subitemcodeArray: [],
@@ -74,30 +80,11 @@ export class Condition2 extends React.PureComponent {
   }
 
   confirm() {
-
-
-    let categorycode = [];
-    this.state.categorycodeArray.forEach((item) => {
-      categorycode.push(item.dictcode);
-    });
-    categorycode = categorycode.join('/');
-
-    let itemcode = [];
-    this.state.itemcodeArray.forEach((item) => {
-      itemcode.push(item.itemcode);
-    });
-    itemcode = itemcode.join('/');
-
-    let subitemcode = [];
-    this.state.subitemcodeArray.forEach((item) => {
-      subitemcode.push(item.itemcode);
-    });
-    subitemcode = subitemcode.join('/');
-
     this.props.onSelect({
-      categorycode,
-      itemcode,
-      subitemcode
+      projectcode: this.getProjectcode(),
+      categorycode: this.getCategorycode(),
+      itemcode: this.getItemcode(),
+      subitemcode: this.getSubitemcode()
     });
     this.toggleVisible();
   }
@@ -131,6 +118,80 @@ export class Condition2 extends React.PureComponent {
     });
   }
 
+  queryFirstCategory() {
+    this.setState({
+      itemcodeArray: [],
+      subitemcodeArray: [],
+    });
+    this.props.queryFirstCategory({
+      "parentid": "",
+      "parentdictcode": "project"
+    });
+  }
+
+  querySecondCategory() {
+    this.setState({
+      itemcodeArray: [],
+      subitemcodeArray: [],
+    });
+    this.props.querySecondCategory({
+      "parentid": "",
+      "parentdictcode": "category"
+    });
+  }
+
+  queryThirdCategory() {
+    this.setState({
+      subitemcodeArray: [],
+    });
+    this.props.queryThirdCategory({
+      "projectcode": this.getProjectcode(),
+      "categorycode": this.getCategorycode(),
+      "parentitemcode": ""
+    });
+  }
+
+  queryFourthCategory() {
+    this.props.queryFourthCategory({
+      "projectcode": this.getProjectcode(),
+      "categorycode": this.getCategorycode(),
+      "parentitemcode":  this.getItemcode()
+    });
+  }
+
+  getProjectcode() {
+    let projectcode = [];
+    console.log('this.state.projectcodeArray', this.state.projectcodeArray)
+    this.state.projectcodeArray.forEach((item) => {
+      projectcode.push(item.dictcode);
+    });
+    return projectcode.join(',');
+  }
+
+  getCategorycode() {
+    let categorycode = [];
+    this.state.categorycodeArray.forEach((item) => {
+      categorycode.push(item.dictcode);
+    });
+    return categorycode.join(',');
+  }
+
+  getItemcode() {
+    let itemcode = [];
+    this.state.itemcodeArray.forEach((item) => {
+      itemcode.push(item.itemcode);
+    });
+    return itemcode.join(',');
+  }
+
+  getSubitemcode() {
+    let subitemcode = [];
+    this.state.subitemcodeArray.forEach((item) => {
+      subitemcode.push(item.itemcode);
+    });
+    return subitemcode.join(',');
+  }
+
 
   handleSelect(item, arrType) {
     let arr = [...this.state[arrType]];
@@ -140,18 +201,35 @@ export class Condition2 extends React.PureComponent {
     } else {
       arr.splice(index, 1)
     }
-    this.setState({
-      [arrType]: arr
-    })
-
     // this.setState({
-    //   [name]: true
+    //   [arrType]: arr
     // });
+
+    this.setState(
+      () => (
+        {
+          [arrType]: arr
+        }
+      ),
+
+      () => {
+        if(arrType == 'projectcodeArray') {
+          this.queryThirdCategory();
+          this.queryFourthCategory();
+        }else if(arrType == 'categorycodeArray') {
+          this.queryThirdCategory();
+          this.queryFourthCategory();
+        } else if(arrType == 'itemcodeArray') {
+          this.queryFourthCategory();
+        }
+      }
+    );
+
   }
 
   render() {
-    const {secondCategory, thirdCategory, fourthCategory} = this.props;
-    const {showList,  startDate, endDate, categorycodeArray, itemcodeArray, subitemcodeArray} = this.state;
+    const {firstCategory, secondCategory, thirdCategory, fourthCategory} = this.props;
+    const {showList,  startDate, endDate, projectcodeArray, categorycodeArray, itemcodeArray, subitemcodeArray} = this.state;
 
     return (
       <Wrapper>
@@ -169,19 +247,47 @@ export class Condition2 extends React.PureComponent {
             ?
             <ListWrapper>
               <Ul>
-                <Li className="filter-title">
-                  分类
-                </Li>
-                <Li className="border-bottom">
-                  <div className="clearfix">
-                    {
-                      secondCategory && secondCategory.length > 0 &&
-                      secondCategory.map((item, index) => (
-                        <Label key={`secondCategory-${index}`} className={cx({ active: categorycodeArray.indexOf(item) != -1 })} onClick={()=>{this.handleSelect(item, 'categorycodeArray')} }>{item.dictname}</Label>
-                      ))
-                    }
+                {
+                  firstCategory && firstCategory.length > 0 &&
+                  <div>
+                    <Li className="filter-title">
+                      项目
+                    </Li>
+                    <Li className="border-bottom">
+                      <div className="clearfix">
+                        {
+                          firstCategory.map((item, index) => (
+                            <Label key={`firstCategory-${index}`}
+                                   className={cx({active: projectcodeArray.indexOf(item) != -1})} onClick={() => {
+                              this.handleSelect(item, 'projectcodeArray')
+                            } }>{item.dictname}</Label>
+                          ))
+                        }
+                      </div>
+                    </Li>
                   </div>
-                </Li>
+                }
+
+                {
+                  secondCategory && secondCategory.length > 0 &&
+                <div>
+                    <Li className="filter-title">
+                      分类
+                    </Li>
+                    <Li className="border-bottom">
+                      <div className="clearfix">
+                        {
+                          secondCategory.map((item, index) => (
+                            <Label key={`secondCategory-${index}`}
+                                   className={cx({active: categorycodeArray.indexOf(item) != -1})} onClick={() => {
+                              this.handleSelect(item, 'categorycodeArray')
+                            } }>{item.dictname}</Label>
+                          ))
+                        }
+                      </div>
+                    </Li>
+                </div>
+                }
 
                 {
                   thirdCategory && thirdCategory.length > 0 &&
@@ -264,6 +370,10 @@ export class Condition2 extends React.PureComponent {
 }
 
 Condition2.propTypes = {
+  firstCategory: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.array,
+  ]),
   secondCategory: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.array,

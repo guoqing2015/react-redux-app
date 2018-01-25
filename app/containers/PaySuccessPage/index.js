@@ -56,6 +56,7 @@ export class PaySuccessPage extends React.PureComponent {
 
   render() {
     const {loading, detail} = this.props;
+    console.log(detail);
     const {modal} = this.state;
 
     return (
@@ -64,18 +65,22 @@ export class PaySuccessPage extends React.PureComponent {
           <title>支付成功</title>
           <meta name="description" content="支付成功"/>
         </Helmet>
+        {
+          detail &&
         <div className="pay__page">
           <div className="pay__img-wrap">
             <img src={PaySuccessPic} alt=""/>
           </div>
           <div className="pay__msg">
             <h2>支付成功</h2>
-            <p>恭喜您，成功购买xx套餐，有效期为1年, 成功购买xx套餐成功购买xx套餐成功购买xx套餐成功购买xx套餐成功购买xx套餐成功购买xx套餐</p>
+            <p>恭喜您，成功购买{detail.tradeinfo.tariffname}，支付费用为：&yen;{detail.tradeinfo.tradeprice}</p>
+            <p>套餐说明：  <span dangerouslySetInnerHTML={{__html: detail.tradeinfo.tradedesc}}></span></p>
           </div>
           <div className="pay__button-wrap">
             <a className="pay__button" onClick={this.back}>返回</a>
           </div>
         </div>
+        }
 
         <Loader active={loading}  />
         <Modal {...modal} close={
