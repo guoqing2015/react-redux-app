@@ -18,12 +18,12 @@ export class Home extends React.PureComponent {
   componentDidMount() {
     // this.props.history.replace('/exercise');
     // this.props.history.replace('find');
-    // this.props.history.replace('chart');
+    this.props.history.replace('chart');
     // this.props.history.replace('notice');
     // this.props.history.replace('exercise-list');
     // this.props.history.replace('renew');
-    this.props.history.replace('/pay-success/333');
-    this.props.history.replace('/pay-error/333');
+    // this.props.history.replace('/pay-success/333');
+    // this.props.history.replace('/pay-error/333');
   }
 
 

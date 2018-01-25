@@ -115,6 +115,10 @@ export class ExercistListPage extends React.PureComponent {
       }), this.initList)
   }
 
+  /**
+   * 选择分类
+   * @param param
+   */
   onSelectOtherCategory(param) {
     this.setState((prevState, props) =>
       ({

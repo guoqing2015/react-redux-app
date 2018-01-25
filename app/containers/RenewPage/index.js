@@ -56,7 +56,7 @@ export class RenewPage extends React.PureComponent { // eslint-disable-line reac
   }
 
   pay() {
-   this.props.history.replace('pay-result/' + "149082436220180123204401364");
+   this.props.history.replace('pay-success/' + "149082436220180123204401364");
     return;
 
 
@@ -123,9 +123,9 @@ export class RenewPage extends React.PureComponent { // eslint-disable-line reac
              // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
           console.log(JSON.stringify(res));
           if (res.err_msg == "get_brand_wcpay_request:ok") {
-            _this.props.history.replace('/pay-result/' + payInfo.tradeno);
+            _this.props.history.replace('/pay-success/' + payInfo.tradeno);
           } else {
-            _this.props.history.push('/pay-result/' + payInfo.tradeno);
+            _this.props.history.push('/pay-error/' + payInfo.tradeno);
           }
         }
       );
