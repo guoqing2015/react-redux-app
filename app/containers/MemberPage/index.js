@@ -124,7 +124,7 @@ export class MemberPage extends React.PureComponent { // eslint-disable-line rea
           </SectionBoxExtend>
 
           <Ul className="border-top-bottom">
-            <Li className="border-bottom">
+           {/* <Li className="border-bottom">
               <ListPad>
                 <IconWrap>
                   <IconInner>
@@ -136,7 +136,7 @@ export class MemberPage extends React.PureComponent { // eslint-disable-line rea
                   <Icon className="iconfont icon-right" color="#cccccc"/>
                 </IconArrowWrap>
               </ListPad>
-            </Li>
+            </Li>*/}
             <Li>
               <Link to="/exercise-list">
                 <ListPad>
@@ -170,7 +170,7 @@ export class MemberPage extends React.PureComponent { // eslint-disable-line rea
             </Link>
           </SectionBoxExtend>
 
-          <CopyRight>©2017 苏州悟本信息科技有限公司 版权所有</CopyRight>
+          <CopyRight>©2018 苏州悟本信息科技有限公司 版权所有</CopyRight>
         </PageContent>
 
 

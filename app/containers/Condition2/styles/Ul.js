@@ -6,6 +6,8 @@ const Ul = styled.ul`
     // left: 0;
     // right: 0;
     // z-index: 999;
+     // overflow-y: scroll;
+     // -webkit-overflow-scrolling: touch;
 `;
 
 export default Ul;

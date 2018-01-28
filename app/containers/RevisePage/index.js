@@ -77,6 +77,7 @@ export class RevisePage extends React.PureComponent {
   componentDidMount() {
     this.props.queryDetail({
       examid: this.props.params.id,
+      userid: this.props.user.userid
     });
   }
 

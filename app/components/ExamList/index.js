@@ -133,10 +133,10 @@ export class ExamList extends React.PureComponent {
                     <FlexTextEllipsis>
                       <ExamName>{item.examname}</ExamName>
                       <ExamTagWrap>
-                        <ExamTag>{item.categoryname}</ExamTag>
-                        <ExamTag>{item.projectname}</ExamTag>
-                        <ExamTag>{item.itemname}</ExamTag>
-                        <ExamTag>{item.subitemname}</ExamTag>
+                        {item.categoryname && <ExamTag>{item.categoryname}</ExamTag>}
+                        {item.projectname && <ExamTag>{item.projectname}</ExamTag>}
+                        {item.itemname && <ExamTag>{item.itemname}</ExamTag>}
+                        {item.subitemname && <ExamTag>{item.subitemname}</ExamTag>}
                       </ExamTagWrap>
                       <ExamTime>{item.createtime}</ExamTime>
 

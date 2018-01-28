@@ -8,6 +8,8 @@ export default styled.section`
   position: absolute;
   top: 0;
   bottom: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   //padding: 1rem;
     word-wrap: break-word;
     word-break: normal;

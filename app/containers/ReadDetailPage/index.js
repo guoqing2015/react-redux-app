@@ -42,6 +42,7 @@ export class ReadDetailPage extends React.PureComponent {
          "contentid": this.props.params.id,
          "statuss": "0,1",  // -1:屏蔽 0:待审核 1:通过
        });
+
     }
 
   }
@@ -57,15 +58,20 @@ export class ReadDetailPage extends React.PureComponent {
   }
 
   addComment(){
+    if(!this.refs.commentInput.value) {
+      return;
+    }
     const {username, userid, headportrait} = this.props.user;
     this.props.addComment({
       "contentid": this.props.params.id,
       "star": 5,
-      "content": this.props.inputs.comment,
+      // "content": this.props.inputs.comment,
+      "content": this.refs.commentInput.value,
       "userid": userid,
       "username": username,
       "userphoto": headportrait
-    })
+    });
+    this.refs.commentInput.value = "";
   }
 
   render() {
@@ -125,7 +131,8 @@ export class ReadDetailPage extends React.PureComponent {
 
           <footer className="read-detail__footer d-flex border-top">
             <div className="col align-self-center">
-              <input name="comment" value={inputs.comment} onChange={handleChange} type="text" placeholder="说点啥吧！" />
+              {/*<input name="comment" value={inputs.comment} onChange={handleChange} type="text" placeholder="说点啥吧！" />*/}
+              <input name="comment" ref="commentInput" type="text" placeholder="说点啥吧！" />
             </div>
             <button onClick={this.addComment}>评论</button>
           </footer>

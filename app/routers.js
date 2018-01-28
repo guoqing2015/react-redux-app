@@ -105,7 +105,7 @@ export default (store, history) => {
         <PrivateRoute path="/exercise" component={ExercisePage}/>
         <PrivateRoute path="/exercise-list" component={ExerciseListPage}/>
         <PrivateRoute path="/exercise-detail/:id" component={ExerciseDetailPage}/>
-        <PrivateRoute path="/find" component={FindPage}/>
+        <PrivateRoute  path="/find" component={FindPage}/>
         <PrivateRoute path="/login" component={LoginPage}/>
         <PrivateRoute path="/member" component={MemberPage}/>
         <PrivateRoute path="/notice" component={NoticePage}/>

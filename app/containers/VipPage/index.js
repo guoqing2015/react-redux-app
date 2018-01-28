@@ -180,7 +180,7 @@ export class UserInfoPage extends React.PureComponent {
             }
           </Trade>
 
-          <CopyRight>©2017 苏州悟本信息科技有限公司 版权所有</CopyRight>
+          <CopyRight>©2018 苏州悟本信息科技有限公司 版权所有</CopyRight>
         </PageContent>
 
         <Loader active={loading}/>

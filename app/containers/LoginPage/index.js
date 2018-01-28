@@ -256,7 +256,7 @@ export class LoginPage extends React.PureComponent {
             <Button onClick={this.handleSubmit}>立即登录</Button>
         </PageContent>
 
-        <CopyRight>©2017 苏州悟本信息科技有限公司 版权所有</CopyRight>
+        <CopyRight>©2018 苏州悟本信息科技有限公司 版权所有</CopyRight>
 
         <ToastContainer />
         <Loader active={loading}  />

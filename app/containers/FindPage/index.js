@@ -14,6 +14,8 @@ import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import {isEmpty, isMobile, isZip} from 'utils/validation';
 
+import Chartist from 'chartist';
+import CopyRight from 'components/CopyRight';
 import Button from 'components/Button';
 import Icon from 'components/Icon';
 import {ToastContainer, toast} from 'components/Toast';
@@ -37,6 +39,9 @@ import {makeSelectLoading, makeSelectError, makeSelectAdList} from './modules/se
 import reducer from './modules/reducer';
 import saga from './modules/saga';
 
+import {examAnalysis, practiceAnalysis} from '../../redux/modules/Chart/modules/actions';
+import {makeSelectExamAnalysisData, makeSelectPracticeAnalysisData} from '../../redux/modules/Chart/modules/selectors';
+
 import {app} from 'setting';
 
 import './index.css'
@@ -54,6 +59,9 @@ export class FindPage extends React.PureComponent {
     this.renderAdList = this.renderAdList.bind(this);
     this.renderMenu = this.renderMenu.bind(this);
 
+    this.analysis = this.analysis.bind(this);
+    this.drawChart = this.drawChart.bind(this);
+
   }
 
   componentDidMount() {
@@ -61,9 +69,55 @@ export class FindPage extends React.PureComponent {
     if(!adList) {
       this.props.queryAdlist();
     }
+
+    // 获取类型
+    this.analysis();
   }
 
   componentWillReceiveProps(nextProps) {
+    if( !this.props.examAnalysisData && nextProps.examAnalysisData) {
+      this.drawChart(nextProps.examAnalysisData);
+    }
+  }
+
+  /**
+   * 获取折线图数据 
+   **/
+  analysis() {
+    const param = {
+      "userid":this.props.user.userid,
+      "projectcode": "",
+      "categorycode": "",
+      "itemcode": "",
+      "subitemcode": "",
+      "startdate": "",
+      "enddate": "",
+    };
+    this.props.examAnalysis(param);
+  }
+
+  /**
+   * 画折线图
+   **/
+  drawChart(data) {
+    let content = data;
+    let labels = [];
+    let seriesValue = [];
+    content.forEach((item, index) => {
+      labels.push(index);
+      seriesValue.push(item.answerscore);
+    });
+    new Chartist.Line('.find-ct-chart', {
+      labels,
+      series: [
+        seriesValue
+      ]
+    }, {
+      fullWidth: true,
+      chartPadding: {
+        right: 40
+      }
+    });
   }
 
 
@@ -153,16 +207,14 @@ export class FindPage extends React.PureComponent {
             </MenuLink>
           </Li>
         </Ul>
-        <div id="test">
 
-        </div>
       </MenuWrap>
 
     )
   }
 
   render() {
-    const {loading} = this.props;
+    const {loading, examAnalysisData} = this.props;
     const {modal, user, userAddress} = this.state;
 
 
@@ -176,6 +228,16 @@ export class FindPage extends React.PureComponent {
           {this.renderAdList()}
           {this.renderMenu()}
 
+          {/*{examAnalysisData &&*/}
+          <div className="find-ability">
+            <h3>能力曲线</h3>
+            <div className="find-ct-chart-box">
+              <div className="find-ct-chart"></div>
+            </div>
+          </div>
+          {/*}*/}
+
+          <CopyRight>©2018 苏州悟本信息科技有限公司 版权所有</CopyRight>
 
         </PageContent>
 
@@ -209,6 +271,8 @@ const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   error: makeSelectError(),
   adList: makeSelectAdList(),
+  examAnalysisData: makeSelectExamAnalysisData(),
+  practiceAnalysisData: makeSelectPracticeAnalysisData(),
 });
 
 
@@ -216,6 +280,12 @@ export function mapDispatchToProps(dispatch) {
   return {
     queryAdlist: () => {
       dispatch(queryAdlist());
+    },
+    examAnalysis: (param) => {
+      dispatch(examAnalysis(param));
+    },
+    practiceAnalysis: (param) => {
+      dispatch(practiceAnalysis(param));
     },
   };
 }

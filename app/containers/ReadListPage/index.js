@@ -68,7 +68,7 @@ export class ReadListPage extends React.PureComponent {
                 (
                     <li className="border-bottom d-flex" key={`read-list-item${index}`} onClick={() => {this.detail(item)}}>
                         <div className="read__img-wrap">
-                          <img src={app.resourceUrl + item.imageurl} alt=""/>
+                          <img src={item.imageurl} alt=""/>
                         </div>
                         <div className="col align-self-center">
                           <h2>{item.contenttitle}</h2>

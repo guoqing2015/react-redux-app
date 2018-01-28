@@ -18,7 +18,7 @@
 }
 
 .slick-slider {
-  height: 7rem;
+  /*height: 7rem;*/
 }
 
 .slick-track {
@@ -27,7 +27,7 @@
 }
 
 .slick-slide  {
-  height: 7rem;
+  /*height: 7rem;*/
   overflow: hidden;
   float: left;
   min-height: 1px;
@@ -68,3 +68,17 @@
   width: 0.75rem;
 }
 
+
+.find-ability {
+  float: left;
+  width: 100%;
+  background: #ffffff;
+  margin-top: 1rem;
+
+}
+
+.find-ability h3 {
+  height: 2rem;
+  line-height: 2rem;
+  padding-left: 0.75rem;
+}
