@@ -28,6 +28,11 @@ const makeSelectIsUpdated = () => createSelector(
   (globalState) => globalState.get('isUpdated')
 );
 
+const makeSelectUpdateLoading = () => createSelector(
+  selectAuth,
+  (globalState) => globalState.get('updateLoading')
+);
+
 const makeSelectIsLoggedIn  = () => createSelector(
   selectAuth,
   (globalState) => globalState.get('isLoggedIn')
@@ -41,5 +46,6 @@ export {
   makeSelectLoading,
   makeSelectError,
   makeSelectIsUpdated,
-  makeSelectIsLoggedIn
+  makeSelectUpdateLoading,
+  makeSelectIsLoggedIn,
 };

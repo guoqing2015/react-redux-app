@@ -127,8 +127,8 @@ export class UserInfoPage extends React.PureComponent {
                   <LineWhite style={ {width: `${100 - percent}%`} }></LineWhite>
                 </LineWrap>
                 <div className="clearfix">
-                  <LvlStartDate>{tariff.startdate}</LvlStartDate>
-                  <LvlEndDate>{tariff.enddate}</LvlEndDate>
+                  <LvlStartDate>{tariff.startdate.substring(0,10)}</LvlStartDate>
+                  <LvlEndDate>{tariff.enddate.substring(0,10)}</LvlEndDate>
                 </div>
                 <FlexBoxAlignCenter >
                   <LvlLeftDay>剩余天数：{dayDuration}天</LvlLeftDay>
@@ -165,7 +165,7 @@ export class UserInfoPage extends React.PureComponent {
                           {item.tariffname}
                         </TariffName>
                         <TariffOther>交易日期：{item.tradetime}</TariffOther>
-                        <TariffOther>有效期：{item.startdate} ~ {item.enddate}</TariffOther>
+                        <TariffOther>交易单号：{item.tradeno}</TariffOther>
                         <TariffOther>支付方式：微信</TariffOther>
                         <TariffOther>交易日期：{item.tradeno}</TariffOther>
                       </Flex>
@@ -180,7 +180,7 @@ export class UserInfoPage extends React.PureComponent {
             }
           </Trade>
 
-          <CopyRight>©2018 苏州悟本信息科技有限公司 版权所有</CopyRight>
+          {/*<CopyRight>©2018 苏州悟本信息科技有限公司 版权所有</CopyRight>*/}
         </PageContent>
 
         <Loader active={loading}/>

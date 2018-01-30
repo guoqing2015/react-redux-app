@@ -31,7 +31,7 @@
   overflow: hidden;
   float: left;
   min-height: 1px;
-
+  line-height: 0;
 }
 
 .slick-slide img {

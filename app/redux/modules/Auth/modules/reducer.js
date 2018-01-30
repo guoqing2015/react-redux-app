@@ -1,4 +1,4 @@
-var data = {
+/*var data = {
   "errcode": 7001,
   "errmsg": "",
   "content": {
@@ -50,7 +50,7 @@ var data = {
     "modifyuser": "7ee34cf9-35e8-48be-ad50-4ada6a8f809e",
     "modifyusername": "7ee34cf9-35e8-48be-ad50-4ada6a8f809e"
   }
-}
+}*/
 
 
 import { fromJS } from 'immutable';
@@ -84,6 +84,7 @@ const initialState = fromJS({
   openid: false,
   user: false,
   isLoggedIn: false,
+  updateLoading: false,
   isUpdated: false
 
 });
@@ -127,20 +128,17 @@ function authReducer(state = initialState, action) {
     case UPDATE_USER_INFO:
       return state
         .set('isUpdated', false)
-        .set('loading', true)
-        .set('error', false);
+        .set('updateLoading', true)
     case UPDATE_USER_INFO_SUCCESS:
       return state
-        .set('loading', false)
-        .set('error', false)
+        .set('updateLoading', false)
         .set('isUpdated', true)
         // .set('user', action.response.content)
     case UPDATE_USER_INFO_ERROR:
       return state;
       return state
         .set('isUpdated', false)
-        .set('loading', false)
-        .set('error', action.error)
+        .set('updateLoading', false)
 
     case LOGGIN:
       return state

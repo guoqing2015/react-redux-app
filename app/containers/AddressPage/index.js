@@ -37,7 +37,7 @@ import Right from './styles/Right';
 import { makeSelectLocation } from '../../redux/modules/Area/modules/selectors';
 
 import { updateUserInfo } from '../../redux/modules/Auth/modules/actions';
-import { makeSelectIsUpdated } from '../../redux/modules/Auth/modules/selectors';
+import { makeSelectIsUpdated, makeSelectUpdateLoading } from '../../redux/modules/Auth/modules/selectors';
 //import {queryAddress, updateAddress} from './modules/actions';
 //import {makeSelectUserAddress, makeSelectLoading, makeSelectError, makeSelectIsUpdateSuccess, makeSelectIsLoaded} from './modules/selectors';
 //import reducer from './modules/reducer';
@@ -162,7 +162,7 @@ export class AddressPage extends React.PureComponent {
 
 
   render() {
-    const {loading } = this.props;
+    const {updateLoading } = this.props;
     const { modal, userAddress } = this.state;
 
     return (
@@ -243,7 +243,7 @@ export class AddressPage extends React.PureComponent {
         </PageContent>
 
         <ToastContainer />
-        <Loader active={loading}/>
+        <Loader active={updateLoading}/>
         <Modal {...modal} close={
         ()=>{this.setState({ modal: { ...this.state.modal, isOpen: false }})
        }
@@ -276,6 +276,7 @@ const mapStateToProps = createStructuredSelector({
   //error: makeSelectError(),
   //isUpdateSuccess: makeSelectIsUpdateSuccess(),
   isUpdated: makeSelectIsUpdated(),
+  updateLoading: makeSelectUpdateLoading(),
   location: makeSelectLocation(),
   //isLoaded: makeSelectIsLoaded()
 });

@@ -76,9 +76,9 @@ export class PaySuccessPage extends React.PureComponent {
             <p>恭喜您，成功购买{detail.tradeinfo.tariffname}，支付费用为：&yen;{detail.tradeinfo.tradeprice}</p>
             <p>套餐说明：  <span dangerouslySetInnerHTML={{__html: detail.tradeinfo.tradedesc}}></span></p>
           </div>
-         {/* <div className="pay__button-wrap">
+         <div className="pay__button-wrap">
             <a className="pay__button" onClick={this.back}>返回</a>
-          </div>*/}
+          </div>
         </div>
         }
 

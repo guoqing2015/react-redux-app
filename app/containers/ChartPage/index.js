@@ -175,7 +175,7 @@ class ChartPage extends React.PureComponent {
           <title>统计</title>
           <meta name="description" content="统计"/>
         </Helmet>
-        <section>
+        <section className="chart-page">
 
 
           <div className="chart-condition">

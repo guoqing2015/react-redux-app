@@ -12,6 +12,7 @@ import {createStructuredSelector} from 'reselect';
 import avatarUrl from 'utils/avatarUrl';
 import {urls} from 'setting';
 
+import { isEmpty, isMobile, isZip, isEmail} from 'utils/validation';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import {sexs, getSex} from 'utils/sex';
@@ -39,9 +40,12 @@ import SexSelectWrap from './styles/SexSelectWrap';
 // import {makeSelectUser} from '../Auth/modules/selectors';
 // import {getNoticeList, updateNoticeStatus} from './modules/actions';
 // import {makeSelectNotices, makeSelectLoading, makeSelectError, makeSelectHasUnread} from './modules/selectors';
-import { logout } from '../../redux/modules/Auth/modules/actions';
+
+import { updateUserInfo, logout } from '../../redux/modules/Auth/modules/actions';
+import { makeSelectIsUpdated, makeSelectUpdateLoading } from '../../redux/modules/Auth/modules/selectors';
 import reducer from './modules/reducer';
 import saga from './modules/saga';
+import './index.scss';
 
 import {app} from 'setting';
 
@@ -62,6 +66,7 @@ export class UserInfoPage extends React.PureComponent {
     this.openDatePicker = this.openDatePicker.bind(this);
     this.handleDatePickerCancel = this.handleDatePickerCancel.bind(this);
     this.handleDatePickerSelect = this.handleDatePickerSelect.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.logout = this.logout.bind(this);
 
   }
@@ -70,7 +75,10 @@ export class UserInfoPage extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-
+    console.log(this.props.isUpdated, nextProps.isUpdated);
+    if(this.props.isUpdated == false && nextProps.isUpdated == true) {
+      toast.info('保存成功');
+    }
   }
 
   /**
@@ -98,9 +106,30 @@ export class UserInfoPage extends React.PureComponent {
     this.handleChange({
       target: {
         name: 'birthday',
-        value: moment(time).format('YYYY/MM/DD')
+        value: moment(time).format('YYYY-MM-DD')
       }
     });
+  }
+
+  handleSubmit(e) {
+    debugger;
+    e.preventDefault();
+
+    const {mail, gender, birthday, userid} = this.state.user;
+
+
+    if (mail && !isEmail(mail)) {
+      toast.info('请填写正确的邮箱');
+      return;
+    }
+
+
+    this.props.updateUserInfo({
+      userid,
+      mail,
+      gender: gender || "",
+      birthday: birthday || ""
+    })
   }
 
   /**
@@ -132,7 +161,7 @@ export class UserInfoPage extends React.PureComponent {
 
 
   render() {
-    const {loading, logout} = this.props;
+    const {updateLoading, logout} = this.props;
     const {modal, user, isOpenDatePicker, imgCode} = this.state;
 
 
@@ -148,7 +177,7 @@ export class UserInfoPage extends React.PureComponent {
               <Label>头像</Label>
               <Flex>
                 <img src={imgCode || (addImgPrefix(user.headportrait) || avatarUrl)} alt=""/>
-                {/*<InputFile type="file" accept="image/jpeg, image/png" onChange={this.selectFile}/>*/}
+                <InputFile type="file" accept="image/jpeg, image/png" onChange={this.selectFile}/>
               </Flex>
             </FlexBoxAlignCenter>
           </AvatarBox>
@@ -169,10 +198,11 @@ export class UserInfoPage extends React.PureComponent {
               <FlexBox>
                 <Label>手机号</Label>
                 <Flex>
-                  <Input name="mobile" type="tel" placeholder="手机号" maxLength="11" value={user.mobile}
-                         onChange={this.handleChange}/>
+                  <Input name="mobile" type="tel" placeholder="手机号" maxLength="11" value={user.mobile} disabled/>
                 </Flex>
-                <Icon className="iconfont icon-right" color="#cccccc"/>
+                <div class="visible-hidden">
+                    <Icon className="iconfont icon-right" color="#cccccc"/>
+                </div>
               </FlexBox>
             </Li>
             <Li className="border-bottom">
@@ -211,9 +241,11 @@ export class UserInfoPage extends React.PureComponent {
               <FlexBox>
                 <Label>班级</Label>
                 <Flex>
-                  <Input name="name" type="text" placeholder="班级" value={user.classnames} onChange={this.handleChange}/>
+                  <Input name="name" type="text" placeholder="班级" value={user.classnames} onChange={this.handleChange} disabled/>
                 </Flex>
-                <Icon className="iconfont icon-right" color="#cccccc"/>
+                <div class="visible-hidden">
+                  <Icon className="iconfont icon-right" color="#cccccc"/>
+                </div>
               </FlexBox>
             </Li>
             <Li className="border-bottom">
@@ -229,24 +261,24 @@ export class UserInfoPage extends React.PureComponent {
             </Li>
           </Ul>
 
-          {/*
-           <Button onClick={this.logout}>退出</Button>
-          */}
 
+           {/*<Button onClick={this.logout}>退出</Button>*/}
+          <Button onClick={this.handleSubmit}>保存</Button>
         </PageContent>
 
 
         <DatePicker
           theme="android"
+          dateFormat={['YYYY年', 'MM月', 'DD日']}
           value={(new Date(user.birthday))}
           isOpen={isOpenDatePicker}
           onSelect={this.handleDatePickerSelect}
           onCancel={this.handleDatePickerCancel}/>
 
-        <Loader active={loading}/>
+        <ToastContainer />
+        <Loader active={updateLoading}/>
         <Modal {...modal} close={
-          () => {
-            this.setState({modal: {...this.state.modal, isOpen: false}})
+          ()=>{this.setState({ modal: { ...this.state.modal, isOpen: false }})
           }
         }></Modal>
 
@@ -262,6 +294,8 @@ UserInfoPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   // user: makeSelectUser(),
+  isUpdated: makeSelectIsUpdated(),
+  updateLoading: makeSelectUpdateLoading()
 });
 
 
@@ -270,6 +304,9 @@ export function mapDispatchToProps(dispatch) {
     logout: () => {
       dispatch(logout());
     },
+    updateUserInfo: (param) => {
+      dispatch(updateUserInfo(param))
+    }
     // updateNoticeStatus: (notice) => {
     //   dispatch(updateNoticeStatus(notice))
     // }

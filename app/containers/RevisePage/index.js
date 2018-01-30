@@ -71,6 +71,7 @@ export class RevisePage extends React.PureComponent {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.goPage = this.goPage.bind(this);
     this.goStep = this.goStep.bind(this);
+    this.back = this.back.bind(this);
 
   }
 
@@ -218,6 +219,10 @@ export class RevisePage extends React.PureComponent {
     });
   }
 
+  back() {
+    this.props.history.goBack();
+  }
+
   /**
    * 上一题/下一题
    *
@@ -278,8 +283,8 @@ export class RevisePage extends React.PureComponent {
     return (
       <div>
         <Helmet>
-          <title>答卷</title>
-          <meta name="description" content="答卷"/>
+          <title>订正</title>
+          <meta name="description" content="订正"/>
         </Helmet>
 
         {/************************************第一步*******************************/}
@@ -421,6 +426,9 @@ export class RevisePage extends React.PureComponent {
                   <Orange>不是很理想，需要再接再厉哦~</Orange>
                 }
               </ExamResult>
+              <div className="white-button-wrap">
+                <a className="white-button" onClick={this.back}>返回</a>
+              </div>
             </ExamInfo>
           </Section>
         }

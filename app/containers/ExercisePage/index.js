@@ -22,9 +22,10 @@ import Modal from 'components/Modal';
 
 import {FlexBox, FlexBoxAlignCenter, Flex} from 'components/FlexLayout';
 import Button from 'components/Button';
-import ExamInfo from 'components/ExamInfo';
+import ExerciseInfo from 'components/ExerciseInfo';
 import {InputRadio} from 'components/Input';
 import Pagination from 'components/Pagination';
+
 
 import Section from './styles/Section';
 import ExamFooter from './styles/ExamFooter';
@@ -73,6 +74,7 @@ export class ExercisePage extends React.PureComponent {
     this.goPage = this.goPage.bind(this);
     this.goStep = this.goStep.bind(this);
     this.revise = this.revise.bind(this);
+    this.back = this.back.bind(this);
 
     this.getProjectcode = this.getProjectcode.bind(this);
     this.getCategorycode = this.getCategorycode.bind(this);
@@ -251,6 +253,10 @@ export class ExercisePage extends React.PureComponent {
     this.props.history.replace('/revise/' + this.props.params.id);
   }
 
+  back() {
+    this.props.history.goBack();
+  }
+
 
   getProjectcode() {
     const { firstCategory, secondCategory, thirdCategory, fourthCategory } = this.refs.categoryComponent.selector.props;
@@ -421,7 +427,7 @@ export class ExercisePage extends React.PureComponent {
           detail && step == 3 &&
           <Section>
             {
-              <ExamInfo detail={detail} type={2} duration={getTimeDuration(startTime, endTime)}></ExamInfo>
+              <ExerciseInfo detail={detail} type={2} duration={getTimeDuration(startTime, endTime)}></ExerciseInfo>
             }
             <ExamFooter className="border-top">
               <FlexBoxAlignCenter>
@@ -444,7 +450,7 @@ export class ExercisePage extends React.PureComponent {
         {
           detail && step == 4 &&
           <Section>
-            <ExamInfo detail={detail} type={3}>
+            <ExerciseInfo detail={detail} type={3}>
               <ExamResult>
                 <div>
                   <ExamScore>{examResult.answerscore}</ExamScore>分
@@ -456,7 +462,10 @@ export class ExercisePage extends React.PureComponent {
                   <Orange>不是很理想，需要再接再厉哦~</Orange>
                 }
               </ExamResult>
-            </ExamInfo>
+              <div className="white-button-wrap">
+                <a className="white-button" onClick={this.back}>返回</a>
+              </div>
+            </ExerciseInfo>
 
             {
               /*

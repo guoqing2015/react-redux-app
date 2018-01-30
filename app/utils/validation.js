@@ -34,10 +34,12 @@ export function isZip(str) {
 
 
 
-export function email(value) {
+export function isEmail(value) {
   // Let's not start a debate on email regex. This is just for an example app!
-  if (!isEmpty(value) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-    return 'Invalid email address';
+  if (!isEmpty(value) && /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+    return true;
+  } else {
+    return false;
   }
 }
 

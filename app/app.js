@@ -4,8 +4,8 @@
   //require('./tests/mock.test');
 //}
 
-var VConsole = require( './tests/vconsole.min');
-var vConsole = new VConsole();
+// var VConsole = require( './tests/vconsole.min');
+// var vConsole = new VConsole();
 
 
 

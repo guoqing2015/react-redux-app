@@ -4,6 +4,7 @@ import { urls } from 'setting';
 
 
 export const loadList = (condition) => {
+  console.log(JSON.stringify(condition, 2, 2))
   return axios.post(urls.ERRANCY_LIST_URL, condition)
     .then((response) => {
       if (response && response.errcode == 7001) {

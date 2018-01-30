@@ -17,26 +17,30 @@ function ExamInfo({detail, type, duration, children}) {
   if(!detail) {
     return null
   }
+  console.log(detail);
   return (
     <div>
 
     <ExamUl className="clearfix">
       <ExamLi className="border-bottom">
-        <ExamName>{detail.examname}</ExamName>
+        <ExamName>{detail.practicename}</ExamName>
       </ExamLi>
       {detail.remark &&
       <ExamLi className="border-bottom">
         <ExamBrief>{detail.remark}</ExamBrief>
       </ExamLi>
       }
+      {
+        (detail.projectname || detail.categoryname || detail.itemname || detail.subitemname) &&
+          <ExamLi className="border-bottom">
+            {detail.projectname && <SubjectTag>{detail.projectname}</SubjectTag>}
+            {detail.categoryname && <SubjectTag>{detail.categoryname}</SubjectTag>}
+            {detail.itemname && <SubjectTag>{detail.itemname}</SubjectTag>}
+            {detail.subitemname && <SubjectTag>{detail.subitemname}</SubjectTag>}
+          </ExamLi>
+      }
       <ExamLi className="border-bottom">
-        {detail.projectname && <SubjectTag>{detail.projectname}</SubjectTag>}
-        {detail.categoryname && <SubjectTag>{detail.categoryname}</SubjectTag>}
-        {detail.itemname && <SubjectTag>{detail.itemname}</SubjectTag>}
-        {detail.subitemname && <SubjectTag>{detail.subitemname}</SubjectTag>}
-      </ExamLi>
-      <ExamLi className="border-bottom">
-        总分：{detail.totalscore} &nbsp;&nbsp;&nbsp;&nbsp;时间：{detail.totalminute}分钟 &nbsp;&nbsp;&nbsp;&nbsp;共{detail.subjectnum}题
+        总分：{detail.totalscore} &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;共{detail.subjectnum}题
       </ExamLi>
       {
         type == 1 &&  <ExamLi className="border-bottom">
