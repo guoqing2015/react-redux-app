@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {Map} from 'immutable';
 import {createStructuredSelector} from 'reselect';
+import PubSub from 'pubsub-js';
 import cx from 'classnames';
 import {urls} from 'setting';
 import {fromJS, List} from 'immutable';
@@ -108,6 +109,7 @@ export class ExamPage extends React.PureComponent {
 
     if (!this.props.examResult && nextProps.examResult) {
       this.goStep(4);
+      PubSub.publish('EXAM_LIST_REFRESH');
     }
 
   }

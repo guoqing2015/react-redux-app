@@ -47,7 +47,7 @@ function ExamList({loading, error, list}) {
                       {item.itemname && <SubjectTag>{item.itemname}</SubjectTag>}
                       {item.subitemname && <SubjectTag>{item.subitemname}</SubjectTag>}
                     </div>
-                      <Result class="clearfix">
+                      <Result className="clearfix">
                         <Left>
                           <IconWrap>
                             <Icon className="iconfont icon-shijian" size="0.8rem"/>

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {createStructuredSelector} from 'reselect';
 import Waypoint from 'react-waypoint';
+import { Link, CacheLink, Control } from 'react-keeper';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
@@ -16,6 +17,7 @@ import Icon from 'components/Icon';
 
 import Condition1 from 'containers/Condition1';
 import Condition2 from 'containers/Condition2';
+import Practice from './styles/Practice';
 
 // import subjectTypes from '../../utils/subjectTypes';
 import subjectOrders from '../../utils/subjectOrders';
@@ -209,6 +211,10 @@ export class ExercistListPage extends React.PureComponent {
               <NoResult>暂无练习记录</NoResult>
             }
           </PageContent>
+
+          <Practice>
+            <Link to="/exercise" />
+          </Practice>
         </Section>
       </div>
     );

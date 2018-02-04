@@ -29,11 +29,17 @@ const makeSelectExamResult = () => createSelector(
   (examState) =>  examState.get('examResult')
 );
 
+const makeSelectSubjectList = () => createSelector(
+  selectExercise,
+  (examState) =>  examState.get('subjectList')
+);
+
 export {
   selectExercise,
   makeSelectLoading,
   makeSelectError,
   makeSelectDetail,
   makeSelectDetailId,
-  makeSelectExamResult
+  makeSelectExamResult,
+  makeSelectSubjectList
 };

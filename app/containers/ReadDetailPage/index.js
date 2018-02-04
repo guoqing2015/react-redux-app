@@ -6,7 +6,7 @@ import {compose} from 'redux';
 import {createStructuredSelector} from 'reselect';
 import { Link, CacheLink, Control } from 'react-keeper';
 import Inputs from 'components/HighOrderComponent/Inputs';
-
+import avatarUrl from 'utils/avatarUrl';
 // import injectReducer from 'utils/injectReducer';
 // import injectSaga from 'utils/injectSaga';
 
@@ -113,7 +113,7 @@ export class ReadDetailPage extends React.PureComponent {
               commentList.map((item, index) => (
                 <li className="d-flex border-bottom" key={`comment-${index}`}>
                   <div className="header-wrap">
-                    <img src={item.userphoto} alt=""/>
+                    <img src={item.userphoto || avatarUrl} alt=""/>
                   </div>
                   <div className="col">
                     <p className="clearfix">

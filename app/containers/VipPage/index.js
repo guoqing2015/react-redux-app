@@ -164,10 +164,10 @@ export class UserInfoPage extends React.PureComponent {
                         <TariffName>
                           {item.tariffname}
                         </TariffName>
-                        <TariffOther>交易日期：{item.tradetime}</TariffOther>
+                        <TariffOther>交易日期：{item.createtime}</TariffOther>
                         <TariffOther>交易单号：{item.tradeno}</TariffOther>
                         <TariffOther>支付方式：微信</TariffOther>
-                        <TariffOther>交易日期：{item.tradeno}</TariffOther>
+                        <TariffOther>交易单号：{item.tradeno}</TariffOther>
                       </Flex>
                       <TradePrice>
                         &yen; <LargeFont>{item.tradeprice}</LargeFont>

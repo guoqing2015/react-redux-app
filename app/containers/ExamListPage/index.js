@@ -4,7 +4,8 @@ import {Helmet} from 'react-helmet';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {createStructuredSelector} from 'reselect';
-import Waypoint from 'react-waypoint';
+// import Waypoint from 'react-waypoint';
+import PubSub from 'pubsub-js';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import injectReducer from 'utils/injectReducer';
@@ -51,6 +52,13 @@ export class ExamListPage extends React.PureComponent {
 
   componentDidMount() {
     this._loadMoreItems();
+      PubSub.subscribe('EXAM_LIST_REFRESH', (event, data) => {
+        this._loadMoreItems();
+      });
+  }
+
+  componentWillUnmount() {
+    PubSub.unsubscribe('EXAM_LIST_REFRESH');
   }
 
   /**
@@ -92,9 +100,6 @@ export class ExamListPage extends React.PureComponent {
           answerstatus: '0' + (tabIndex + 1)
         }
       }), this.loadList)
-
-
-
   }
 
 
@@ -129,7 +134,7 @@ export class ExamListPage extends React.PureComponent {
             <TabList>
               <Tab>待完成</Tab>
               <Tab>已完成</Tab>
-              <Tab>未完成</Tab>
+              <Tab>已过期</Tab>
             </TabList>
             <TabPanel></TabPanel>
             <TabPanel></TabPanel>

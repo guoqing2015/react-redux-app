@@ -35,7 +35,7 @@ export class AboutPage extends React.PureComponent {
   componentDidMount() {
     this.props.queryCms({
       "categorycode": "aboutus",
-      "status": 4 //4：已发布
+      "status": 3 //4：已发布
     });
   }
 

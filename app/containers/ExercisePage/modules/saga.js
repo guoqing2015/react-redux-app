@@ -1,6 +1,11 @@
 import { take, call, put, select, cancel, takeLatest, fork } from 'redux-saga/effects';
-import { QUERY_DETAIL, BUILD_PRACTICE, SUBMIT_ANSWER } from './constants';
-import { queryDetailSuccess, queryDetailError, submitAnswerSuccess, submitAnswerError, buildPracticeSuccess, buildPracticeError} from './actions';
+import { QUERY_DETAIL, BUILD_PRACTICE, SUBMIT_ANSWER, QUERY_SUBJECT_LIST } from './constants';
+import {
+  queryDetailSuccess, queryDetailError,
+  submitAnswerSuccess, submitAnswerError,
+  buildPracticeSuccess, buildPracticeError,
+  querySubjectListSuccess, querySubjectListError
+} from './actions';
 import * as Api from './Api';
 
 export function* queryDetailSaga() {
@@ -41,10 +46,24 @@ export function* submitAnswerSaga() {
   }
 }
 
+
+export function* querySubjectListSaga() {
+  while (true) {
+    const {payload} = yield take(QUERY_SUBJECT_LIST);
+    const { response, error } = yield call(Api.querySubjectList, payload );
+    if (response && !error) {
+      yield put(querySubjectListSuccess(response));
+    } else {
+      yield put(querySubjectListError(error));
+    }
+  }
+}
+
 export default function* rootSaga() {
   yield fork(queryDetailSaga);
   yield fork(buildPracticeSaga);
   yield fork(submitAnswerSaga);
+  yield fork(querySubjectListSaga);
 }
 
 

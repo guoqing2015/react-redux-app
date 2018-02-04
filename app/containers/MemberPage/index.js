@@ -37,6 +37,7 @@ import IconArrowWrap from './styles/IconArrowWrap';
 import ListPad from './styles/ListPad';
 
 
+
 //import {makeSelectUser} from '../Auth/modules/selectors';
 
 import {makeSelectHasUnread, makeSelectNotices} from '../NoticePage/modules/selectors';
@@ -124,19 +125,21 @@ export class MemberPage extends React.PureComponent { // eslint-disable-line rea
           </SectionBoxExtend>
 
           <Ul className="border-top-bottom">
-           {/* <Li className="border-bottom">
+            <Li className="border-bottom">
+              <Link to="/errancy">
               <ListPad>
                 <IconWrap>
                   <IconInner>
                     <Icon className="iconfont icon-ceshijilu" size="1.3rem" color="#AE91DF" />
                   </IconInner>
                 </IconWrap>
-                测试记录
+                错题库
                 <IconArrowWrap>
                   <Icon className="iconfont icon-right" color="#cccccc"/>
                 </IconArrowWrap>
               </ListPad>
-            </Li>*/}
+              </Link>
+            </Li>
             <Li>
               <Link to="/exercise-list">
                 <ListPad>

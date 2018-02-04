@@ -46,8 +46,8 @@ import ExamImg from './styles/ExamImg';
 //import AnswerInput from './styles/AnswerInput';
 
 
-import {queryDetail, buildPractice, submitAnswer} from './modules/actions';
-import {makeSelectDetail, makeSelectDetailId, makeSelectLoading, makeSelectError, makeSelectExamResult} from './modules/selectors';
+import {queryDetail, buildPractice, submitAnswer, querySubjectList} from './modules/actions';
+import {makeSelectDetail, makeSelectDetailId, makeSelectLoading, makeSelectError, makeSelectExamResult, makeSelectSubjectList} from './modules/selectors';
 import reducer from './modules/reducer';
 import saga from './modules/saga';
 import Category from 'containers/Category';
@@ -80,6 +80,7 @@ export class ExercisePage extends React.PureComponent {
     this.getCategorycode = this.getCategorycode.bind(this);
     this.getItemcode = this.getItemcode.bind(this);
     this.getSubitemcode = this.getSubitemcode.bind(this);
+    this.querySubjectList = this.querySubjectList.bind(this);
 
   }
 
@@ -139,6 +140,12 @@ export class ExercisePage extends React.PureComponent {
    */
   goStep(num) {
     if(num == 2 && !this.state.startTime) {
+      if(this.refs.exersiceSizeInput.value == 0) return;
+      if(!this.props.subjectList) return;
+      if(parseInt(this.refs.exersiceSizeInput.value) > this.props.subjectList.length) {
+        toast.info('超过最大题数')
+        return;
+      }
       this.props.buildPractice({
         "userid":this.props.user.userid,
         "projectcode": this.getProjectcode(),
@@ -307,8 +314,17 @@ export class ExercisePage extends React.PureComponent {
     return subitemcode.join(',');
   }
 
+  querySubjectList() {
+    this.props.querySubjectList({
+      "projectcode": this.getProjectcode(),
+      "categorycode": this.getCategorycode(),
+      "itemcode": this.getItemcode(),
+      "subitemcode": this.getSubitemcode(),
+    });
+  }
+
   render() {
-    const {loading, detail, examResult, match} = this.props;
+    const {loading, detail, examResult, subjectList, match} = this.props;
     const {modal, step, answerinfo, currentSubjectIndex, startTime, endTime} = this.state;
     const isShowLast = currentSubjectIndex != 0;
     const isShowNext = detail && currentSubjectIndex < (detail.subjectinfo.length - 1);
@@ -323,9 +339,12 @@ export class ExercisePage extends React.PureComponent {
         {/************************************第一步*******************************/}
         {step == 1 &&
         <Section>
-          <Category ref="categoryComponent" />
+          <Category ref="categoryComponent" querySubjectList={this.querySubjectList} />
           <div className="exercise-size">
             题数: <input ref="exersiceSizeInput" type="text" />
+          </div>
+          <div className="exercise-tip">
+            为您查询到 {subjectList && <span className="exercise-tip-text">{subjectList.length}</span>} {!subjectList && '--'} 条题
           </div>
           <Button onClick={()=> {this.goStep(2)}}>我已选好，立即练习</Button>
           {/*<ExamInfo detail={detail} type={1}></ExamInfo>*/}
@@ -523,6 +542,7 @@ const mapStateToProps = createStructuredSelector({
   detail: makeSelectDetail(),
   detailId: makeSelectDetailId(),
   examResult: makeSelectExamResult(),
+  subjectList: makeSelectSubjectList()
 });
 
 
@@ -537,6 +557,10 @@ export function mapDispatchToProps(dispatch) {
     submitAnswer: (param) => {
       dispatch(submitAnswer(param))
     },
+    querySubjectList: (param) => {
+      dispatch(querySubjectList(param))
+    },
+
   };
 }
 

@@ -39,6 +39,7 @@ export const urls = {
   PRACTICE_LIST_URL: app.url + "/api/practice/practicelist",
   PRACTICE_DETAIL_URL: app.url + "/api/practice/practicedetail",
   PRACTICE_SUBMIT_URL: app.url + "/api/practice/submitpractice",
+  PRACTICE_SUMJECT_LIST_URL: app.url + "/api/subject/getlist",
 
   SUBJECT_DETAIL_URL: app.url + "/api/subject/subjectdetail",
   QUERY_COLLECT_URL: app.url + "/api/user/collectlist",

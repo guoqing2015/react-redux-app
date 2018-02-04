@@ -206,9 +206,9 @@ export class ErrancyPage extends React.PureComponent {
               <NoResult>暂无记录</NoResult>
             }
           </PageContent>
-          <Practice>
+         {/* <Practice>
             <Link to="/exercise" />
-          </Practice>
+          </Practice>*/}
         </Section>
       </div>
     );

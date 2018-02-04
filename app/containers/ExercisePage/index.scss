@@ -21,3 +21,11 @@
     border: 1px solid #dcdcdc;
   }
 }
+
+.exercise-tip {
+  padding: 0.5rem 0 0 0.75rem;
+
+  &-text {
+    color: #ff9a14;
+  }
+}

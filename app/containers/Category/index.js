@@ -60,7 +60,9 @@ export class CategoryFour extends React.Component {
     if(!this.props.fourthCategory && nextProps.fourthCategory) {
       this.setState({
         fourthCategory: nextProps.fourthCategory
-      })
+      });
+      this.props.querySubjectList && this.props.querySubjectList();
+      debugger;
     }
   }
 
@@ -278,6 +280,7 @@ CategoryFour.propTypes = {
     PropTypes.bool,
     PropTypes.array,
   ]),
+  querySubjectList: PropTypes.func
 };
 
 const mapStateToProps = createStructuredSelector({

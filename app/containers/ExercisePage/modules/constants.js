@@ -10,5 +10,8 @@ export const SUBMIT_ANSWER = 'App/exercise/SUBMIT_ANSWER';
 export const SUBMIT_ANSWER_SUCCESS = 'App/exercise/SUBMIT_ANSWER_SUCCESS';
 export const SUBMIT_ANSWER_ERROR = 'App/exercise/SUBMIT_ANSWER_ERROR';
 
+export const QUERY_SUBJECT_LIST = 'App/exercise/QUERY_SUBJECT_LIST';
+export const QUERY_SUBJECT_LIST_SUCCESS = 'App/exercise/QUERY_SUBJECT_LIST_SUCCESS';
+export const QUERY_SUBJECT_LIST_ERROR = 'App/exercise/QUERY_SUBJECT_LIST_ERROR';
 
 

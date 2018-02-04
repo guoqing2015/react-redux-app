@@ -10,6 +10,9 @@ import {
   BUILD_PRACTICE,
   BUILD_PRACTICE_SUCCESS,
   BUILD_PRACTICE_ERROR,
+  QUERY_SUBJECT_LIST,
+  QUERY_SUBJECT_LIST_SUCCESS,
+  QUERY_SUBJECT_LIST_ERROR,
 } from './constants';
 
 
@@ -18,7 +21,8 @@ const initialState = Map({
   error: false,
   detailId: false,
   detail: false,
-  examResult: false
+  examResult: false,
+  subjectList: false
 });
 
 
@@ -70,6 +74,15 @@ function reducer(state = initialState, action) {
         .set('error', action.error)
         .set('loading', false)
         .set('examResult', false)
+    case QUERY_SUBJECT_LIST:
+      return state
+        .set('subjectList', false)
+    case QUERY_SUBJECT_LIST_SUCCESS:
+      return state
+        .set('subjectList', action.response.content)
+    case QUERY_SUBJECT_LIST_ERROR:
+      return state
+        .set('subjectList', false)
     default:
       return state;
   }

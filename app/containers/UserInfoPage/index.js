@@ -75,7 +75,6 @@ export class UserInfoPage extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props.isUpdated, nextProps.isUpdated);
     if(this.props.isUpdated == false && nextProps.isUpdated == true) {
       toast.info('保存成功');
     }
@@ -115,7 +114,7 @@ export class UserInfoPage extends React.PureComponent {
     debugger;
     e.preventDefault();
 
-    const {mail, gender, birthday, userid} = this.state.user;
+    const {username, mail, gender, birthday, userid} = this.state.user;
 
 
     if (mail && !isEmail(mail)) {
@@ -125,6 +124,7 @@ export class UserInfoPage extends React.PureComponent {
 
 
     this.props.updateUserInfo({
+      username,
       userid,
       mail,
       gender: gender || "",
@@ -177,7 +177,7 @@ export class UserInfoPage extends React.PureComponent {
               <Label>头像</Label>
               <Flex>
                 <img src={imgCode || (addImgPrefix(user.headportrait) || avatarUrl)} alt=""/>
-                <InputFile type="file" accept="image/jpeg, image/png" onChange={this.selectFile}/>
+                {/*<InputFile type="file" accept="image/jpeg, image/png" onChange={this.selectFile}/>*/}
               </Flex>
             </FlexBoxAlignCenter>
           </AvatarBox>
@@ -198,9 +198,9 @@ export class UserInfoPage extends React.PureComponent {
               <FlexBox>
                 <Label>手机号</Label>
                 <Flex>
-                  <Input name="mobile" type="tel" placeholder="手机号" maxLength="11" value={user.mobile} disabled/>
+                  <Input name="mobile" type="tel" placeholder="手机号" maxLength="11" value={user.mobile} readonly/>
                 </Flex>
-                <div class="visible-hidden">
+                <div className="visible-hidden">
                     <Icon className="iconfont icon-right" color="#cccccc"/>
                 </div>
               </FlexBox>
@@ -231,8 +231,7 @@ export class UserInfoPage extends React.PureComponent {
               <FlexBox>
                 <Label>生日</Label>
                 <Flex>
-                  <Input name="birthday" type="text" placeholder="生日" value={user.birthday} onChange={this.handleChange}
-                         readOnly onClick={this.openDatePicker}/>
+                  <div className="text-right" name="birthday" type="text" onClick={this.openDatePicker}>{user.birthday || '生日'}</div>
                 </Flex>
                 <Icon className="iconfont icon-right" color="#cccccc"/>
               </FlexBox>
@@ -241,24 +240,31 @@ export class UserInfoPage extends React.PureComponent {
               <FlexBox>
                 <Label>班级</Label>
                 <Flex>
-                  <Input name="name" type="text" placeholder="班级" value={user.classnames} onChange={this.handleChange} disabled/>
+                  <Input name="name" type="text" placeholder="班级" value={user.classnames} onChange={this.handleChange} readonly/>
                 </Flex>
-                <div class="visible-hidden">
+                <div className="visible-hidden">
                   <Icon className="iconfont icon-right" color="#cccccc"/>
                 </div>
               </FlexBox>
             </Li>
-            <Li className="border-bottom">
+            <li className="user-info_address_li border-bottom">
               <Link to="/address">
-                <FlexBox>
+                <div className="d-flex align-items-center">
                   <Label>地址管理</Label>
-                  <Flex>
-                    <Input name="name" type="text" placeholder="地址管理" value={user.name} onChange={this.handleChange}/>
-                  </Flex>
+                  <div className="col ">
+                    {!user.provincename &&
+                    <Input name="name" type="text" placeholder="地址管理" readonly value=""/>
+                    }
+                    {user.provincename &&
+                    <div className="user-info-address">
+                      {user.provincename + user.cityname + user.countyname + user.homeaddress}
+                    </div>
+                    }
+                  </div>
                   <Icon className="iconfont icon-right" color="#cccccc"/>
-                </FlexBox>
+                </div>
               </Link>
-            </Li>
+            </li>
           </Ul>
 
 

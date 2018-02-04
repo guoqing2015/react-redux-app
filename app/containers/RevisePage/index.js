@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {Map} from 'immutable';
 import {createStructuredSelector} from 'reselect';
+import PubSub from 'pubsub-js';
 import cx from 'classnames';
 import {urls} from 'setting';
 import {fromJS, List} from 'immutable';
@@ -80,6 +81,7 @@ export class RevisePage extends React.PureComponent {
       examid: this.props.params.id,
       userid: this.props.user.userid
     });
+    PubSub.publish('EXAM_LIST_REFRESH');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -108,6 +110,7 @@ export class RevisePage extends React.PureComponent {
 
     if (!this.props.examResult && nextProps.examResult) {
       this.goStep(4);
+      PubSub.publish('EXAM_LIST_REFRESH');
     }
 
   }

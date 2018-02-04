@@ -8,6 +8,9 @@ import {
   BUILD_PRACTICE,
   BUILD_PRACTICE_SUCCESS,
   BUILD_PRACTICE_ERROR,
+  QUERY_SUBJECT_LIST,
+  QUERY_SUBJECT_LIST_SUCCESS,
+  QUERY_SUBJECT_LIST_ERROR,
 } from './constants';
 
 export function queryDetail(payload) {
@@ -70,6 +73,28 @@ export function submitAnswerSuccess(response) {
 export function submitAnswerError(error) {
   return {
     type: SUBMIT_ANSWER_ERROR,
+    error,
+  };
+}
+
+
+export function querySubjectList(payload) {
+  return {
+    type: QUERY_SUBJECT_LIST,
+    payload
+  };
+}
+
+export function querySubjectListSuccess(response) {
+  return {
+    type: QUERY_SUBJECT_LIST_SUCCESS,
+    response,
+  };
+}
+
+export function querySubjectListError(error) {
+  return {
+    type: QUERY_SUBJECT_LIST_ERROR,
     error,
   };
 }

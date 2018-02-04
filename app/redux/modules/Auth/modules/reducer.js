@@ -133,7 +133,7 @@ function authReducer(state = initialState, action) {
       return state
         .set('updateLoading', false)
         .set('isUpdated', true)
-        // .set('user', action.response.content)
+        .set('user', action.response.content)
     case UPDATE_USER_INFO_ERROR:
       return state;
       return state
