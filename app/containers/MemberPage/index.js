@@ -130,7 +130,7 @@ export class MemberPage extends React.PureComponent { // eslint-disable-line rea
               <ListPad>
                 <IconWrap>
                   <IconInner>
-                    <Icon className="iconfont icon-ceshijilu" size="1.3rem" color="#AE91DF" />
+                    <Icon className="iconfont icon-cuotikuicon" size="1.1rem" color="#AE91DF" />
                   </IconInner>
                 </IconWrap>
                 错题库
@@ -145,7 +145,7 @@ export class MemberPage extends React.PureComponent { // eslint-disable-line rea
                 <ListPad>
                   <IconWrap>
                     <IconInner>
-                      <Icon className="iconfont icon-icon_lianxijilu_normal" color="#64B5E8"/>
+                      <Icon className="iconfont icon-jilu" size="1.1rem" color="#64B5E8"/>
                     </IconInner>
                   </IconWrap>
                   练习记录

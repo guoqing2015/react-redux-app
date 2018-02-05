@@ -37,8 +37,8 @@ export class CategoryFour extends React.Component {
   componentDidMount() {
     this.queryFirstCategory();
     this.querySecondCategory();
-    this.queryThirdCategory();
-    this.queryFourthCategory();
+    // this.queryThirdCategory();
+    // this.queryFourthCategory();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -81,19 +81,23 @@ export class CategoryFour extends React.Component {
   }
 
   queryThirdCategory() {
-    this.props.queryThirdCategory({
-      "projectcode": this.getProjectcode(),
-      "categorycode": this.getCategorycode(),
-      "parentitemcode": ""
-    });
+    if(this.getProjectcode() && this.getCategorycode()) {
+      this.props.queryThirdCategory({
+        "projectcode": this.getProjectcode(),
+        "categorycode": this.getCategorycode(),
+        "parentitemcode": ""
+      });
+    }
   }
 
   queryFourthCategory() {
-    this.props.queryFourthCategory({
-      "projectcode": this.getProjectcode(),
-      "categorycode": this.getCategorycode(),
-      "parentitemcode":  this.getItemcode()
-    });
+    if(this.getProjectcode() && this.getCategorycode()) {
+      this.props.queryFourthCategory({
+        "projectcode": this.getProjectcode(),
+        "categorycode": this.getCategorycode(),
+        "parentitemcode": this.getItemcode()
+      });
+    }
   }
 
   getProjectcode() {
@@ -142,17 +146,22 @@ export class CategoryFour extends React.Component {
 
   toggleSelect(i, arrType) {
     var arr = [...this.state[arrType]];
-    if(arr[i].checked){
-      arr[i].checked = false;
-      this.setState({
-        [arrType]: arr
-      });
-    } else {
+    arr.forEach((v) => {
+      v.checked = false;
+    });
+
+    // console.log(arr);
+    // if(arr[i].checked){
       arr[i].checked = true;
       this.setState({
         [arrType]: arr
       });
-    }
+    // } else {
+    //   arr[i].checked = true;
+    //   this.setState({
+    //     [arrType]: arr
+    //   });
+    // }
 
     if(arrType == 'firstCategory') {
       this.queryThirdCategory();
@@ -180,11 +189,14 @@ export class CategoryFour extends React.Component {
             {
               firstCategory.map((item, index) => (
                 <div key={item.dictid} className="category__content">
-                  <FlexBoxAlignCenter onClick={() => {this.toggleSelect(index, 'firstCategory')}}>
-                    <InputCheckBox
+                  <FlexBoxAlignCenter >
+                    <InputRadio
                       id={`first-${item.dictid}`}
+                      type="radio"
                       name="first"
+                      value={item.dictcode}
                       checked={!!item.checked}
+                      onChange={(event) => this.toggleSelect(index, 'firstCategory')}
                     />
                     <label>{item.dictname}</label>
                   </FlexBoxAlignCenter>
@@ -206,8 +218,8 @@ export class CategoryFour extends React.Component {
             {
               secondCategory.map((item, index) => (
                 <div key={item.dictid} className="category__content">
-                  <FlexBoxAlignCenter onClick={() => {this.toggleSelect(index, 'secondCategory')}}>
-                    <InputCheckBox id={`second-${item.dictid}`} name="second" checked={!!item.checked} />
+                  <FlexBoxAlignCenter>
+                    <InputRadio id={`second-${item.dictid}`} name="second" checked={!!item.checked} onClick={() => {this.toggleSelect(index, 'secondCategory')}} />
                     <label>{item.dictname}</label>
                   </FlexBoxAlignCenter>
                 </div>
@@ -226,8 +238,8 @@ export class CategoryFour extends React.Component {
                 {
                   thirdCategory.map((item, index) => (
                     <div key={item.id} className="category__content">
-                      <FlexBoxAlignCenter onClick={() => {this.toggleSelect(index, 'thirdCategory')}}>
-                        <InputCheckBox id={`third-${item.id}`} name="third" checked={!!item.checked}  />
+                      <FlexBoxAlignCenter>
+                        <InputRadio id={`third-${item.id}`} name="third" checked={!!item.checked}   onChange={(event) => this.toggleSelect(index, 'thirdCategory')} />
                         <label>{item.itemname}</label>
                       </FlexBoxAlignCenter>
                     </div>
@@ -247,8 +259,8 @@ export class CategoryFour extends React.Component {
               {
                 fourthCategory.map((item, index) => (
                   <div key={item.id} className="category__content">
-                    <FlexBoxAlignCenter onClick={() => {this.toggleSelect(index, 'fourthCategory')}}>
-                      <InputCheckBox id={`third-${item.id}`} name="fourth" checked={!!item.checked}  />
+                    <FlexBoxAlignCenter>
+                      <InputRadio id={`third-${item.id}`} name="fourth" checked={!!item.checked}  onClick={() => {this.toggleSelect(index, 'fourthCategory')}}  />
                       <label>{item.itemname}</label>
                     </FlexBoxAlignCenter>
                   </div>

@@ -344,7 +344,7 @@ export class ExercisePage extends React.PureComponent {
             题数: <input ref="exersiceSizeInput" type="text" />
           </div>
           <div className="exercise-tip">
-            为您查询到 {subjectList && <span className="exercise-tip-text">{subjectList.length}</span>} {!subjectList && '--'} 条题
+            为您查询到 {subjectList && <span className="exercise-tip-text">{subjectList.length}</span>} {!subjectList && '--'} 道题
           </div>
           <Button onClick={()=> {this.goStep(2)}}>我已选好，立即练习</Button>
           {/*<ExamInfo detail={detail} type={1}></ExamInfo>*/}

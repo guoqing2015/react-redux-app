@@ -105,7 +105,7 @@ export class FindPage extends React.PureComponent {
     let seriesValue = [];
     content.forEach((item, index) => {
       labels.push(index+1);
-      seriesValue.push(item.answerscore);
+      seriesValue.push(item.scorerate);
     });
     new Chartist.Line('.find-ct-chart', {
       labels,
@@ -175,9 +175,9 @@ export class FindPage extends React.PureComponent {
             </MenuLink>
           </Li>
           <Li>
-            <MenuLink to={"/exercise"}>
+            <MenuLink to={"/exercise-list"}>
               <IconWrap>
-                <Icon className="iconfont icon-cuotikuicon" size="1.3rem" color="#3D98FF"  />
+                <Icon className="iconfont icon-jilu" size="1.4rem" color="#3D98FF"  />
               </IconWrap>
               <span>练习</span>
             </MenuLink>

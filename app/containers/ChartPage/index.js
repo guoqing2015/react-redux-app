@@ -140,7 +140,7 @@ class ChartPage extends React.PureComponent {
     let seriesValue = [];
     content.forEach((item, index) => {
       labels.push(index+1);
-      seriesValue.push(item.answerscore);
+      seriesValue.push(item.scorerate);
     });
     new Chartist.Line('.ct-chart', {
       labels,

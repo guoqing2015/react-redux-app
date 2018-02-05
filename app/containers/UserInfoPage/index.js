@@ -276,7 +276,7 @@ export class UserInfoPage extends React.PureComponent {
         <DatePicker
           theme="android"
           dateFormat={['YYYY年', 'MM月', 'DD日']}
-          value={(new Date(user.birthday))}
+          value={(new Date(user.birthday.replace(/-/g, '/')))}
           isOpen={isOpenDatePicker}
           onSelect={this.handleDatePickerSelect}
           onCancel={this.handleDatePickerCancel}/>

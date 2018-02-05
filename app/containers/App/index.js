@@ -40,13 +40,17 @@ class App extends React.Component {
     this.getOpenid();
     this.getWxconfig();
 
-    //TODO
-     this.props.getUserInfo(
-       {
-         // userid:  "f8872189-6f02-4abb-87fb-8caa9b6ea301", // 17365367130
-         userid:  "7ee34cf9-35e8-48be-ad50-4ada6a8f809e", //18020285885
-       }
-     );
+    //此处供测试用
+    if (process.env.NODE_ENV === 'development') {
+       this.props.getUserInfo(
+         {
+           // userid:  "f8872189-6f02-4abb-87fb-8caa9b6ea301", // 17365367130
+           userid:  "7ee34cf9-35e8-48be-ad50-4ada6a8f809e", //18020285885
+         }
+       );
+    }
+
+
   }
 
   componentWillReceiveProps(nextProps) {

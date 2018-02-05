@@ -33,7 +33,7 @@ export function* updateNoticeSaga() {
     let param = {
       // cust_id: parseInt(user.id),
       id: payload.id,
-      status_code: statusCode, // 2 已读 3 删除
+      method: statusCode, //  //00:删除 01:已读
 
       // "operatetype":"00/01" //00:删除 01:已读
     }

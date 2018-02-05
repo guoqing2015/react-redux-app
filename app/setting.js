@@ -53,7 +53,7 @@ export const urls = {
   USER_INFO_UPDATE_URL: app.url + "/api/user/update", //更新会员信息
 
   NOTICE_LIST_URL:  app.url + "/api/user/messagelist", // 获取系统消息列表
-  UPEATE_NOTICE_URL:  app.url + "/api/user/updatemessage", // 更新系统消息状态
+  UPEATE_NOTICE_URL:  app.url + "/api/msg/updatemessage", // 更新系统消息状态
 
   CMS_LIST_URL:  app.url + "/api/cms/cmslist",
   QUERY_DICT: app.url + "/api/base/getdict",
