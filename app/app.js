@@ -1,7 +1,7 @@
 
 //开发环境下模拟接口数据
 //if (process.env.NODE_ENV === 'development') {
-  //require('./tests/mock.test');
+  require('./tests/mock.test');
 //}
 
 // var VConsole = require( './tests/vconsole.min');

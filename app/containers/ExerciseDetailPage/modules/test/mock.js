@@ -1,7 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { urls } from 'setting';
-
 var data = {
   "errcode": 7001,
   "errmsg": "",

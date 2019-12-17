@@ -75,8 +75,23 @@ export class ReadDetailPage extends React.PureComponent {
   }
 
   render() {
-    const {loading, handleChange, inputs, commentList} = this.props;
+    let {loading, handleChange, inputs, commentList} = this.props;
     const {detail} = this.state;
+
+    commentList = [
+      {
+        userphoto: '',
+        username: 'test',
+        createtime: '2019-01-01 12:00',
+        content: '了解'
+      },
+      {
+        userphoto: '',
+        username: '海海',
+        createtime: '2019-01-01 12:00',
+        content: '又涨价了！'
+      }
+    ]
 
     return (
       <div>
@@ -85,7 +100,7 @@ export class ReadDetailPage extends React.PureComponent {
           <meta name="description" content="资讯详情"/>
         </Helmet>
 
-        <Loader active={loading}/>
+        {/* <Loader active={loading}/> */}
 
         <div className="read-detail ">
           {

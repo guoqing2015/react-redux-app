@@ -4,7 +4,7 @@ import { urls } from 'setting';
 
 export const queryDetail = (param) => {
   console.log(JSON.stringify(param, 2, 2));
-  return axios.post(urls.PRACTICE_DETAIL_URL, param)
+  return axios.get(urls.PRACTICE_DETAIL_URL, param)
     .then((response) => {
       if(response && response.errcode == 7001) {
         return {response}

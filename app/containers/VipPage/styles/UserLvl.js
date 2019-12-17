@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default styled.div`
     position: absolute;
      bottom: -4.9rem;
-    height: 5.4rem;
+    height: 6.4rem;
     
     
     // bottom: -1.9rem;
